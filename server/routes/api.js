@@ -12,7 +12,7 @@ const con = mysql.createConnection({
 
 /* GET api listing. */
 router.get('/', (req, res) => {
-  res.send('api works');
+  res.send('api works!');
 });
 
 module.exports = router;
