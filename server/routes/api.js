@@ -3,11 +3,11 @@ const router = express.Router();
 const mysql           = require("mysql");
 
 const con = mysql.createConnection({
-  host: "bobbindb.chwrjcnilfzs.us-west-2.rds.amazonaws.com",
-  user: "root",
-  password: "password",
+  host: "https://academic-mysql.cc.gatech.edu/cs4400_30",
+  user: "cs4400_30",
+  password: "hBMdGbRb",
   port: "3306",
-  database: "bobbin"
+  database: "cs4400_30"
 });
 
 /* GET api listing. */
