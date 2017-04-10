@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
 
     login() {
         if (this.userService.login(this.model.username, this.model.password)) {
+            this.userService.showNavBar(true);
             this.router.navigate(["/home"]);
         } else {
             alert("wrong username/password");

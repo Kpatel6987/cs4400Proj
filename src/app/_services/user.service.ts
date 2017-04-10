@@ -7,6 +7,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 @Injectable()
 export class UserService {
 
+  private _showNavBar: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public showNavBarEmitter: Observable<boolean> = this._showNavBar.asObservable();
+
   constructor(
     private router: Router
   ) {}
@@ -25,6 +28,10 @@ export class UserService {
 
   isAuthenticated() {
     return localStorage.getItem('user') != null;
+  }
+
+  showNavBar(ifShow: boolean) {
+    this._showNavBar.next(ifShow);
   }
 
 

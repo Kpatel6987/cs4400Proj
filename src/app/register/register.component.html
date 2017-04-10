@@ -1,3 +1,47 @@
-<p>
-  register works!
-</p>
+<div class="container">
+    <h2>CS 4400</h2>
+    <form name="form" (ngSubmit)="f.form.valid && register()" #f="ngForm" novalidate>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+            <label for="username">Username</label>
+            <input type="text" class="form-control" name="username" [(ngModel)]="model.username" #username="ngModel" required />
+            <div *ngIf="f.submitted && !username.valid" class="help-block">Username is required</div>
+        </div>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !email.valid }">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" name="email" [(ngModel)]="model.email" #email="ngModel" required />
+            <div *ngIf="f.submitted && !email.valid" class="help-block">Email is required</div>
+        </div>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !password.valid }">
+            <label for="password">Password</label>
+            <input type="password" class="form-control" name="password" [(ngModel)]="model.password" #password="ngModel" required />
+            <div *ngIf="f.submitted && !password.valid" class="help-block">Password is required</div>
+        </div>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !confPassword.valid }">
+            <label for="confPassword">Confirm Password</label>
+            <input type="password" class="form-control" name="confPassword" [(ngModel)]="model.confPassword" #confPassword="ngModel" required />
+            <div *ngIf="f.submitted && !confPassword.valid" class="help-block">Confirm Password is required</div>
+        </div>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !confPassword.valid }">
+            <select for="userType" name="userType" [(ngModel)]="model.userType" required>
+                <option [value]="" disabled selected>Choose your User Type</option>
+                <option [value]="official">City Official</option>
+                <option [value]="scientist">City Scientist</option>
+            </select>
+            <div *ngIf="f.submitted && !userType.valid" class="help-block">User Type is required</div>
+        </div>
+        {{this.model.password}}
+        {{this.model.userType}}
+        <div  class="form-group" [ngClass]="{ 'has-error': f.submitted && !confPassword.valid }">
+            <label for="confPassword">Confirm Password</label>
+            <input type="password" class="form-control" name="confPassword" [(ngModel)]="model.confPassword" #confPassword="ngModel" required />
+            <div *ngIf="f.submitted && !confPassword.valid" class="help-block">Confirm Password is required</div>
+        </div>
+        <div class="form-group">
+            <button [disabled]="loading" class="btn btn-primary">Register</button>
+            <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
+        </div>
+    </form>
+</div>
+
+
+
