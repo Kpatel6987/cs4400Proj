@@ -10,6 +10,9 @@ import { UserService } from '../_services/user.service';
 export class RegisterComponent implements OnInit {
 
   model: any = {};
+  cities = ['Atl', 'Bos', 'SF'];
+  states = ['GA', 'FL', 'CA'];
+  types = ['City Official', 'City Scientist'];
   
   constructor(
     private route: ActivatedRoute,

@@ -22,19 +22,31 @@
             <div *ngIf="f.submitted && !confPassword.valid" class="help-block">Confirm Password is required</div>
         </div>
         <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !confPassword.valid }">
+            <label>User Type</label>
             <select for="userType" name="userType" [(ngModel)]="model.userType" required>
-                <option [value]="" disabled selected>Choose your User Type</option>
-                <option [value]="official">City Official</option>
-                <option [value]="scientist">City Scientist</option>
+                <option *ngFor="let type of types" [ngValue]="type">{{type}}</option>
             </select>
             <div *ngIf="f.submitted && !userType.valid" class="help-block">User Type is required</div>
         </div>
-        {{this.model.password}}
-        {{this.model.userType}}
-        <div  class="form-group" [ngClass]="{ 'has-error': f.submitted && !confPassword.valid }">
-            <label for="confPassword">Confirm Password</label>
-            <input type="password" class="form-control" name="confPassword" [(ngModel)]="model.confPassword" #confPassword="ngModel" required />
-            <div *ngIf="f.submitted && !confPassword.valid" class="help-block">Confirm Password is required</div>
+        
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !confPassword.valid }" *ngIf="this.model.userType == 'City Official'">
+            <label>City</label>
+            <select for="city" name="city" [(ngModel)]="model.city" required>
+                <option *ngFor="let city of cities" [ngValue]="city">{{city}}</option>
+            </select>
+            <div *ngIf="f.submitted && !city.valid" class="help-block">City is required</div>
+        </div>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !confPassword.valid }" *ngIf="this.model.userType == 'City Official'">
+            <label>State</label>
+            <select for="state" name="state" [(ngModel)]="model.state" required>
+                <option *ngFor="let state of states" [ngValue]="state">{{state}}</option>
+            </select>
+            <div *ngIf="f.submitted && !state.valid" class="help-block">State is required</div>
+        </div>
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !title.valid }" *ngIf="this.model.userType == 'City Official'">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" name="title" [(ngModel)]="model.title" #title="ngModel" required />
+            <div *ngIf="f.submitted && !title.valid" class="help-block">Title is required</div>
         </div>
         <div class="form-group">
             <button [disabled]="loading" class="btn btn-primary">Register</button>
