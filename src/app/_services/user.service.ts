@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Observable } from 'rxjs/Observable';
 import { Router, ActivatedRoute } from '@angular/router';
+import { Http, Response } from '@angular/http';
 
 
 @Injectable()
@@ -11,15 +12,12 @@ export class UserService {
   public showNavBarEmitter: Observable<boolean> = this._showNavBar.asObservable();
 
   constructor(
-    private router: Router
+    private router: Router,
+    private http: Http
   ) {}
 
   login(username: string, password: string) {
-    if (username == "user123" && password == "password") {
-        localStorage.setItem('user', username);
-        return true;
-    }
-    return false;
+    return this.http.get('/api/getUser?username='+ username + '&password='+password).map((res:Response) => res.json());
   }
 
   logout() {
@@ -27,7 +25,7 @@ export class UserService {
   }
 
   isAuthenticated() {
-    return localStorage.getItem('user') != null;
+    return localStorage.getItem('user') != null && localStorage.getItem('user') != undefined;
   }
 
   showNavBar(ifShow: boolean) {

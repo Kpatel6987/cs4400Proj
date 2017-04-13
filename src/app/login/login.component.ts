@@ -9,6 +9,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
     model: any = {};
+    user;
 
     constructor(
         private userService: UserService,
@@ -20,13 +21,21 @@ export class LoginComponent implements OnInit {
         this.userService.logout();
     }
 
-    login() {
-        if (this.userService.login(this.model.username, this.model.password)) {
-            this.userService.showNavBar(true);
-            this.router.navigate(["/home"]);
-        } else {
-            alert("wrong username/password");
-        }
+    login() {        
+        this.userService.login(this.model.username, this.model.password)
+        .subscribe(data => 
+            {
+                if (data.Username == null || data.Username == undefined) {
+                    alert("Invalid");
+                } else {
+                    this.userService.showNavBar(true);
+                    this.router.navigate(["/home"]);
+                    localStorage.setItem('user', data.Username);
+                    localStorage.setItem('type', data.UserType);
+                    console.log(data)
+                }
+               
+            });
     }
 
 }

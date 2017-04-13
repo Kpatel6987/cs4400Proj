@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const mysql           = require("mysql");
+const mysql = require("mysql");
 
 const con = mysql.createConnection({
   host: "academic-mysql.cc.gatech.edu",
@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
 });
 
 router.get("/userList", function(req, res) {
-        con.query('SELECT * FROM userInfo',function(err,rows) {
+        con.query('SELECT * FROM User',function(err,rows) {
         if(err)
            console.log("Error Selecting : %s ",err );
             res.json(rows);
@@ -35,7 +35,7 @@ router.get("/userList", function(req, res) {
         var username = req.query.username;
         var password = req.query.password;
         var obj = { status: false};
-        con.query("SELECT * FROM userInfo WHERE username = ? and password = ?",
+        con.query("SELECT * FROM User WHERE username = ? and password = ?",
             [username, password], function(err, response){
             if (err)
                 res.json(err);

@@ -1,0 +1,32 @@
+<div clas="container">
+  <form name="form" (ngSubmit)="f.form.valid && submit()" #f="ngForm" novalidate>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !location.valid }">
+        <label for="location">POI Location Name</label>
+        <input type="text" class="form-control" name="location" [(ngModel)]="model.location" #location="ngModel" required />
+        <div *ngIf="f.submitted && !location.valid" class="help-block">Location Name is required</div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !city.valid }">
+        <label>City</label>
+        <select for="city" name="city" [(ngModel)]="model.city" required>
+            <option *ngFor="let city of cities" [ngValue]="city">{{city}}</option>
+        </select>
+        <div *ngIf="f.submitted && !city.valid" class="help-block">City is required</div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !state.valid }">
+        <label>State</label>
+        <select for="state" name="state" [(ngModel)]="model.state" required>
+            <option *ngFor="let state of states" [ngValue]="state">{{state}}</option>
+        </select>
+        <div *ngIf="f.submitted && !state.valid" class="help-block">State is required</div>
+    </div>
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !zipcode.valid }">
+        <label for="zipcode">Zip Code</label>
+        <input type="text" class="form-control" name="zipcode" [(ngModel)]="model.zipcode" #zipcode="ngModel" required />
+        <div *ngIf="f.submitted && !zipcode.valid" class="help-block">Zip Code is required</div>
+    </div>
+    <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">Submit</button>
+        <a [routerLink]="['/login']" class="btn btn-link">Cancel</a>
+    </div>
+  </form>
+</div>

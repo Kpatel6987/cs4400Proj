@@ -12,6 +12,8 @@ import { AuthGuard } from './_guards/auth.guard';
 import { UserService } from './_services/user.service';
 import { RegisterComponent } from './register/register.component';
 import { NavbarComponent } from './navbar/navbar.component';
+import { DataPointComponent } from './data-point/data-point.component';
+import { PoiLocationComponent } from './poi-location/poi-location.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,9 @@ import { NavbarComponent } from './navbar/navbar.component';
     HomeComponent,
     LoginComponent,
     RegisterComponent,
-    NavbarComponent
+    NavbarComponent,
+    DataPointComponent,
+    PoiLocationComponent
   ],
   imports: [
     BrowserModule,
