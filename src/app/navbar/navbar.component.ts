@@ -10,18 +10,26 @@ import { UserService } from '../_services/user.service';
 export class NavbarComponent {
 
   showNavBar: boolean = false;
+  userType;
 
   constructor(
     private router: Router,
     private userService: UserService
   ) {
     this.userService.showNavBarEmitter.subscribe((mode)=>{
+      if (mode) {
+        this.showNavBar = true;
+      } else {
         if (this.userService.isAuthenticated()) {
             this.showNavBar = true;
         } else {
             this.showNavBar = false;
         }
+      }
+        
       });
+
+      this.userType = localStorage.getItem('type');
   }
 
 

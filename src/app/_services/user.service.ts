@@ -22,6 +22,7 @@ export class UserService {
 
   logout() {
     localStorage.removeItem('user');
+    localStorage.removeItem('type');
   }
 
   isAuthenticated() {

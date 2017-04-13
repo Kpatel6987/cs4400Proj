@@ -1,3 +1,13 @@
 <p>
   home works!
 </p>
+<div class="container">
+  <button *ngIf="this.userType == 'City Scientist'" [routerLink]="['/datapoint']" class="btn btn-primary">Add a Data Point</button>
+  <button *ngIf="this.userType == 'City Scientist'" [routerLink]="['/poilocation']" class="btn btn-primary">Add a POI Location</button>
+
+  <button *ngIf="this.userType == 'Admin'" [routerLink]="['']" class="btn btn-primary">Pending Data Points</button>
+  <button *ngIf="this.userType == 'Admin'" [routerLink]="['']" class="btn btn-primary">Pending City Official Accounts</button>
+
+  <button *ngIf="this.userType == 'City Official'" [routerLink]="['']" class="btn btn-primary">Filter/Search POI</button>
+  <button *ngIf="this.userType == 'City Official'" [routerLink]="['']" class="btn btn-primary">POI Report</button>
+</div>

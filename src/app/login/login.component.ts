@@ -25,13 +25,14 @@ export class LoginComponent implements OnInit {
         this.userService.login(this.model.username, this.model.password)
         .subscribe(data => 
             {
-                if (data.Username == null || data.Username == undefined) {
+                console.log(data);
+                if (data[0].Username == null || data[0].Username == undefined) {
                     alert("Invalid");
                 } else {
                     this.userService.showNavBar(true);
                     this.router.navigate(["/home"]);
-                    localStorage.setItem('user', data.Username);
-                    localStorage.setItem('type', data.UserType);
+                    localStorage.setItem('user', data[0].Username);
+                    localStorage.setItem('type', data[0].UserType);
                     console.log(data)
                 }
                
