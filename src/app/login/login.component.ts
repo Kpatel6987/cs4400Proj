@@ -25,8 +25,8 @@ export class LoginComponent implements OnInit {
         this.userService.login(this.model.username, this.model.password)
         .subscribe(data => 
             {
-                console.log(data);
-                if (data[0].Username == null || data[0].Username == undefined) {
+                //console.log(data);
+                if (data.length == 0 || data[0].Username == null || data[0].Username == undefined) {
                     alert("Invalid");
                 } else {
                     this.userService.showNavBar(true);

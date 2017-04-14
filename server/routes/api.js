@@ -55,16 +55,16 @@ router.get("/userList", function(req, res) {
         });
     });
 
-    router.put("/addUser", function(req, res) {
+    router.post("/addUser", function(req, res) {
         var username = req.body.username;
         var password = req.body.password;
         var email = req.body.email;
         var userType = req.body.userType;
-        var values = "(" + firstName + "," + lastName + "," + username + "," + email + "," + password + "," + accountType + ")";
-        con.query("INSERT INTO Users VALUES (?, ?, ?, ?)",
+        con.query("INSERT INTO User VALUES (?, ?, ?, ?)",
          [username, email, password, userType], function(err, resp) {
             if (err) {
                 console.log("Error " + err);
+                res.json(resp);
             }
             res.json(resp);
          });

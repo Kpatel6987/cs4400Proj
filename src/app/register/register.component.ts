@@ -17,7 +17,7 @@ export class RegisterComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-
+    private userService: UserService
   ) { }
 
   ngOnInit() {
@@ -28,9 +28,16 @@ export class RegisterComponent implements OnInit {
       alert("Passwords do not match");
       return false;
     }
-    alert("LOL");
-    //this.router.navigate(["/login"]);
-    console.log(this.model);
+    this.userService.register(this.model).subscribe(
+      data => console.log(data),
+      err => alert(err),
+      () => {
+        this.model = {};
+        alert("Success");
+        this.router.navigate(["/login"]);
+      }
+    );
+    //alert("LOL");
   }
 
 }
