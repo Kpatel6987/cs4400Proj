@@ -28,15 +28,23 @@ export class RegisterComponent implements OnInit {
       alert("Passwords do not match");
       return false;
     }
-    this.userService.register(this.model).subscribe(
-      data => console.log(data),
-      err => alert(err),
-      () => {
-        this.model = {};
-        alert("Success");
-        this.router.navigate(["/login"]);
-      }
-    );
+    this.userService.checkUser(this.model.username).subscribe(data =>
+      {
+        console.log(data);
+        if (data.length == 0) {
+          this.userService.register(this.model).subscribe(
+            data => console.log(data),
+            () => {
+              this.model = {};
+              alert("Success");
+              this.router.navigate(["/login"]);
+            }
+          );
+        } else {
+            alert("That username already exists");
+        }
+      });
+    
   }
 
 }

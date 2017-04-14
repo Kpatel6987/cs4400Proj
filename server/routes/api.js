@@ -23,7 +23,6 @@ router.post("/addUser", function(req, res) {
     var password = req.body.password;
     var email = req.body.email;
     var userType = req.body.userType;
-    var values = "(" + firstName + "," + lastName + "," + username + "," + email + "," + password + "," + accountType + ")";
     con.query("INSERT INTO User VALUES (?, ?, ?, ?)",
      [username, email, password, userType], function(err, resp) {
         if (err) {
@@ -47,8 +46,7 @@ router.get("/getUser", function(req, res) {
 
 router.get("/checkUser", function(req, res) {
     var username = req.query.username;
-    var obj = { status: false};
-    con.query("SELECT * FROM userInfo WHERE username = ?",
+    con.query("SELECT * FROM User WHERE username = ?",
         username, function(err, response){
         if (err)
             res.json(err);

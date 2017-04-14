@@ -37,6 +37,10 @@ export class UserService {
     return this.http.post('api/addUser', model, {}).map(res => res.json());
   }
 
+  checkUser(username) {
+    console.log(username);
+    return this.http.get('/api/checkUser?username='+username).map((res:Response) => res.json());
+  }
 
 
 }
