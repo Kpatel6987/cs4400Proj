@@ -42,7 +42,6 @@ router.get("/getUser", function(req, res) {
         if (err)
             res.json(err);
         res.json(response);
-
     });
 });
 
