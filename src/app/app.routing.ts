@@ -21,13 +21,13 @@ import { PendingDataPointsComponent } from './pending-data-points/pending-data-p
 
 const appRoutes: Routes = [
     { path: 'poilocation', component: PoiLocationComponent, canActivate: [AuthGuard] },
+    { path: 'datapoint', component: DataPointComponent, canActivate: [AuthGuard] },
+    
     { path: 'poidetail', component: PoiDetailComponent, canActivate: [AuthGuard] },
     { path: 'viewpois', component: ViewPoisComponent, canActivate: [AuthGuard] },
-    { path: 'datapoint', component: DataPointComponent, canActivate: [AuthGuard] },
 
     { path: 'pendingaccounts', component: PendingAccountsComponent, canActivate: [AuthGuard] },
     { path: 'pendingdatapoints', component: PendingDataPointsComponent, canActivate: [AuthGuard] },
-
 
     { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'login', component: LoginComponent },
