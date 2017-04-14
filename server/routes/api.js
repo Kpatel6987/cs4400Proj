@@ -56,16 +56,13 @@ router.get("/userList", function(req, res) {
     });
 
     router.put("/addUser", function(req, res) {
-        var firstName = req.body.firstName;
-        var lastName = req.body.lastName;
         var username = req.body.username;
         var password = req.body.password;
         var email = req.body.email;
-        var accountType = req.body.accountType;
+        var userType = req.body.userType;
         var values = "(" + firstName + "," + lastName + "," + username + "," + email + "," + password + "," + accountType + ")";
-        con.query("INSERT INTO userInfo SET firstName = ?, lastName = ?, "
-            + "username = ?, email = ?, password = ?, accountType = ?",
-         [firstName, lastName, username, email, password, accountType], function(err, resp) {
+        con.query("INSERT INTO Users VALUES (?, ?, ?, ?)",
+         [username, email, password, userType], function(err, resp) {
             if (err) {
                 console.log("Error " + err);
             }
