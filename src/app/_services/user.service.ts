@@ -33,6 +33,10 @@ export class UserService {
     this._showNavBar.next(ifShow);
   }
 
+  register(model) {
+    return this.http.post('api/addUser', model, {}).map(res => res.json());
+  }
+
 
 
 }

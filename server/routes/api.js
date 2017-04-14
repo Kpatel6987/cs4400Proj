@@ -72,6 +72,20 @@ router.get("/userList", function(req, res) {
         });
     });
 
+    router.post("/addUser", function(req, res) {
+        var username = req.body.username;
+        var password = req.body.password;
+        var email = req.body.email;
+        var userType = req.body.userType;
+        con.query("INSERT INTO User VALUES (?, ?, ?, ?)",
+         [username, email, password, userType], function(err, resp) {
+            if (err) {
+                console.log("Error " + err);
+                res.json(resp);
+            }
+            res.json(resp);
+         });
+    });
 
     router.put("/editUser", function(req, res) {
         var firstName = req.body.firstName;

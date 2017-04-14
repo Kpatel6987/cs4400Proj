@@ -26,24 +26,24 @@
             <select for="userType" name="userType" [(ngModel)]="model.userType" required>
                 <option *ngFor="let type of types" [ngValue]="type">{{type}}</option>
             </select>
-            <div *ngIf="f.submitted && !userType.valid" class="help-block">User Type is required</div>
+            <div *ngIf="f.submitted && userType == ''" class="help-block">User Type is required</div>
         </div>
         
-        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !confPassword.valid }" *ngIf="this.model.userType == 'City Official'">
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted }" *ngIf="this.model.userType == 'City Official'">
             <label>City</label>
             <select for="city" name="city" [(ngModel)]="model.city" required>
                 <option *ngFor="let city of cities" [ngValue]="city">{{city}}</option>
             </select>
-            <div *ngIf="f.submitted && !city.valid" class="help-block">City is required</div>
+            <div *ngIf="f.submitted && this.model.userType == 'City Official' && city == ''" class="help-block">City is required</div>
         </div>
-        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !confPassword.valid }" *ngIf="this.model.userType == 'City Official'">
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted }" *ngIf="this.model.userType == 'City Official'">
             <label>State</label>
             <select for="state" name="state" [(ngModel)]="model.state" required>
                 <option *ngFor="let state of states" [ngValue]="state">{{state}}</option>
             </select>
-            <div *ngIf="f.submitted && !state.valid" class="help-block">State is required</div>
+            <div *ngIf="f.submitted && this.model.userType == 'City Official' && state == ''" class="help-block">State is required</div>
         </div>
-        <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !title.valid }" *ngIf="this.model.userType == 'City Official'">
+        <div class="form-group" [ngClass]="{ 'has-error': f.submitted }" *ngIf="this.model.userType == 'City Official'">
             <label for="title">Title</label>
             <input type="text" class="form-control" name="title" [(ngModel)]="model.title" #title="ngModel" required />
             <div *ngIf="f.submitted && !title.valid" class="help-block">Title is required</div>
