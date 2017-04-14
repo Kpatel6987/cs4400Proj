@@ -37,7 +37,6 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(["/login"]);
       }
     );
-    //alert("LOL");
   }
 
 }

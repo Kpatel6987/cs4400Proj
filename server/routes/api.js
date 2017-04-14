@@ -18,13 +18,13 @@ con.connect(function(err) {
     console.log("Successfully connected to 4400 DB");
 });
 
-router.put("/addUser", function(req, res) {
+router.post("/addUser", function(req, res) {
     var username = req.body.username;
     var password = req.body.password;
     var email = req.body.email;
     var userType = req.body.userType;
     var values = "(" + firstName + "," + lastName + "," + username + "," + email + "," + password + "," + accountType + ")";
-    con.query("INSERT INTO Users VALUES (?, ?, ?, ?)",
+    con.query("INSERT INTO User VALUES (?, ?, ?, ?)",
      [username, email, password, userType], function(err, resp) {
         if (err) {
             console.log("Error " + err);
@@ -46,6 +46,17 @@ router.get("/getUser", function(req, res) {
     });
 });
 
+router.get("/checkUser", function(req, res) {
+    var username = req.query.username;
+    var obj = { status: false};
+    con.query("SELECT * FROM userInfo WHERE username = ?",
+        username, function(err, response){
+        if (err)
+            res.json(err);
+        res.json(response);
+    });
+});
+
 /* !!!!!!!!!      EVERYTHING BELOW THIS LINE IS FROM 2340     !!!!!!!!!! */
 
 /* GET api listing. */
@@ -62,16 +73,7 @@ router.get("/userList", function(req, res) {
     });
 
 
-    router.get("/checkUser", function(req, res) {
-        var username = req.query.username;
-        var obj = { status: false};
-        con.query("SELECT * FROM userInfo WHERE username = ?",
-            username, function(err, response){
-            if (err)
-                res.json(err);
-            res.json(response);
-        });
-    });
+    
 
     router.post("/addUser", function(req, res) {
         var username = req.body.username;
