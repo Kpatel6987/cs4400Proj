@@ -18,6 +18,36 @@ con.connect(function(err) {
     console.log("Successfully connected to 4400 DB");
 });
 
+router.put("/addUser", function(req, res) {
+    var username = req.body.username;
+    var password = req.body.password;
+    var email = req.body.email;
+    var userType = req.body.userType;
+    var values = "(" + firstName + "," + lastName + "," + username + "," + email + "," + password + "," + accountType + ")";
+    con.query("INSERT INTO Users VALUES (?, ?, ?, ?)",
+     [username, email, password, userType], function(err, resp) {
+        if (err) {
+            console.log("Error " + err);
+        }
+        res.json(resp);
+     });
+});
+
+router.get("/getUser", function(req, res) {
+    var username = req.query.username;
+    var password = req.query.password;
+    var obj = { status: false};
+    con.query("SELECT * FROM User WHERE username = ? and password = ?",
+        [username, password], function(err, response){
+        if (err)
+            res.json(err);
+        res.json(response);
+
+    });
+});
+
+/* !!!!!!!!!      EVERYTHING BELOW THIS LINE IS FROM 2340     !!!!!!!!!! */
+
 /* GET api listing. */
 router.get('/', (req, res) => {
   res.send('api works!');
@@ -31,18 +61,6 @@ router.get("/userList", function(req, res) {
          });
     });
 
-    router.get("/getUser", function(req, res) {
-        var username = req.query.username;
-        var password = req.query.password;
-        var obj = { status: false};
-        con.query("SELECT * FROM User WHERE username = ? and password = ?",
-            [username, password], function(err, response){
-            if (err)
-                res.json(err);
-            res.json(response);
-
-        });
-    });
 
     router.get("/checkUser", function(req, res) {
         var username = req.query.username;
@@ -55,20 +73,6 @@ router.get("/userList", function(req, res) {
         });
     });
 
-    router.put("/addUser", function(req, res) {
-        var username = req.body.username;
-        var password = req.body.password;
-        var email = req.body.email;
-        var userType = req.body.userType;
-        var values = "(" + firstName + "," + lastName + "," + username + "," + email + "," + password + "," + accountType + ")";
-        con.query("INSERT INTO Users VALUES (?, ?, ?, ?)",
-         [username, email, password, userType], function(err, resp) {
-            if (err) {
-                console.log("Error " + err);
-            }
-            res.json(resp);
-         });
-    });
 
     router.put("/editUser", function(req, res) {
         var firstName = req.body.firstName;
