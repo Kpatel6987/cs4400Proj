@@ -14,6 +14,12 @@ import { RegisterComponent } from './register/register.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { DataPointComponent } from './data-point/data-point.component';
 import { PoiLocationComponent } from './poi-location/poi-location.component';
+import { PendingDataPointsComponent } from './pending-data-points/pending-data-points.component';
+import { PendingAccountsComponent } from './pending-accounts/pending-accounts.component';
+import { ViewPoisComponent } from './view-pois/view-pois.component';
+import { PoiDetailComponent } from './poi-detail/poi-detail.component';
+import { PoiReportComponent } from './poi-report/poi-report.component';
+import { ChooseFunctionalityComponent } from './choose-functionality/choose-functionality.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +29,13 @@ import { PoiLocationComponent } from './poi-location/poi-location.component';
     RegisterComponent,
     NavbarComponent,
     DataPointComponent,
-    PoiLocationComponent
+    PoiLocationComponent,
+    PendingDataPointsComponent,
+    PendingAccountsComponent,
+    ViewPoisComponent,
+    PoiDetailComponent,
+    PoiReportComponent,
+    ChooseFunctionalityComponent
   ],
   imports: [
     BrowserModule,
