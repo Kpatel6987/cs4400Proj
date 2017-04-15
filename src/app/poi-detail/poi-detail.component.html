@@ -1,3 +1,30 @@
-<p>
-  poi-detail works!
-</p>
+<div clas="container">
+  <form name="form" (ngSubmit)="f.form.valid && submit()" #f="ngForm" novalidate>
+    <div class="form-group">
+        <label>Data Type</label>
+        <select for="dataType" name="dataType" [(ngModel)]="model.dataType">
+            <option *ngFor="let type of types" [ngValue]="type">{{type}}</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="valueFrom">Data Value From</label>
+        <input type="number" class="form-control" name="valueFrom" [(ngModel)]="model.valueFrom" #valueFrom="ngModel" />
+    </div>
+    <div class="form-group">
+        <label for="valueTo">Data Value To</label>
+        <input type="number" class="form-control" name="valueTo" [(ngModel)]="model.valueTo" #valueTo="ngModel" />
+    </div>
+    <div class="form-group">
+        <label>Date From</label>
+        <input type="date" class="form-control" name="date" [(ngModel)]="model.dateFrom" #date="ngModel" />
+    </div>
+    <div class="form-group">
+        <label>Date To</label>
+        <input type="date" class="form-control" name="date" [(ngModel)]="model.dateTo" #date="ngModel"/>
+    </div>
+    <div class="form-group">
+        <button [routerLink]="['/home']" class="btn btn-danger">Clear</button>
+        <button [disabled]="loading" class="btn btn-primary">Search</button>
+    </div>
+  </form>
+</div>

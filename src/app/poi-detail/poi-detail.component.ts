@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PoiDetailComponent implements OnInit {
 
+  model = {};
+  
   constructor() { }
 
   ngOnInit() {
+  }
+
+  submit() {
+    console.log(this.model);
   }
 
 }

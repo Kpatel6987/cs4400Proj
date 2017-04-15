@@ -15,4 +15,7 @@ export class ViewPoisComponent implements OnInit {
   ngOnInit() {
   }
 
+  submit() {
+    console.log(this.model);
+  }
 }
