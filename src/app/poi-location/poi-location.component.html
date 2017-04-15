@@ -5,24 +5,24 @@
         <input type="text" class="form-control" name="location" [(ngModel)]="model.location" #location="ngModel" required />
         <div *ngIf="f.submitted && !location.valid" class="help-block">Location Name is required</div>
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !city.valid }">
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted }">
         <label>City</label>
         <select for="city" name="city" [(ngModel)]="model.city" required>
             <option *ngFor="let city of cities" [ngValue]="city">{{city}}</option>
         </select>
-        <div *ngIf="f.submitted && !city.valid" class="help-block">City is required</div>
+        <div *ngIf="f.submitted && !city == ''" class="help-block">City is required</div>
     </div>
-    <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !dataType.valid }">
+    <div class="form-group" [ngClass]="{ 'has-error': f.submitted }">
         <label>Data Type</label>
         <select for="dataType" name="dataType" [(ngModel)]="model.dataType" required>
             <option *ngFor="let type of types" [ngValue]="type">{{type}}</option>
         </select>
-        <div *ngIf="f.submitted && !dataType.valid" class="help-block">Data Type is required</div>
+        <div *ngIf="f.submitted && !dataType == ''" class="help-block">Data Type is required</div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !zipcode.valid }">
         <label for="zipcode">Zip Code</label>
-        <input type="text" class="form-control" name="zipcode" [(ngModel)]="model.zipcode" #zipcode="ngModel" required />
-        <div *ngIf="f.submitted && !zipcode.valid" class="help-block">Zip Code is required</div>
+        <input type="text" class="form-control" name="zipcode" [(ngModel)]="model.zipcode" #zipcode="ngModel" [pattern]="validation" required />
+        <div *ngIf="f.submitted && !zipcode.valid" class="help-block">Zip Code must be a 5 digit number</div>
     </div>
     <div class="form-group">
         <button [routerLink]="['/home']" class="btn btn-danger">Cancel</button>

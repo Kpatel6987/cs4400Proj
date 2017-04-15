@@ -10,7 +10,9 @@ import { UserService } from '../_services/user.service';
 export class DataPointComponent implements OnInit {
 
   model: any = {};
-  cities = ['Atl', 'Bos', 'SF'];
+  ities = ['Atl', 'Bos', 'SF'];
+  types = ['1', '2'];
+  validation = /^\d{5}$/;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,6 +24,7 @@ export class DataPointComponent implements OnInit {
 
   submit() {
     //this.router.navigate(["/login"]);
+    this.model.datetime = this.model.date + " " + this.model.time;
     console.log(this.model);
   }
 }

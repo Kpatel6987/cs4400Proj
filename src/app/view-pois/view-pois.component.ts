@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ViewPoisComponent implements OnInit {
 
+  model: any = {};
+  types = ['Mold', 'Air Quality'];
+  
   constructor() { }
 
   ngOnInit() {

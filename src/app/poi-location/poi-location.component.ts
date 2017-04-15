@@ -10,6 +10,8 @@ import { UserService } from '../_services/user.service';
 export class PoiLocationComponent implements OnInit {
   model: any = {};
   cities = ['Atl', 'Bos', 'SF'];
+  types = ['1', '2'];
+  validation = /^\d{5}$/;
 
   constructor(
     private route: ActivatedRoute,

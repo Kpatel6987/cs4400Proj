@@ -1,3 +1,31 @@
-<p>
-  pending-accounts works!
-</p>
+<div class="container">
+  <h2>Pending City Official Accounts</h2>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>Email</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Title</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let account of accounts | async">
+        <td>{{ account.userame }}</td>
+        <td>{{ account.email }}</td>
+        <td>{{ account.city }}</td>
+        <td>{{ account.state }}</td>
+        <td>{{ account.title }}</td>
+        <td>
+          <button type="button" class="btn btn-success" (click)="accept(account)">Accept</button>
+          <button type="button" class="btn btn-danger" (click)="reject(account)">Reject</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <button [routerLink]="['/home']" class="btn btn-danger">Back</button>
+
+</div>
