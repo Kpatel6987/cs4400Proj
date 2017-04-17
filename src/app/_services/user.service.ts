@@ -42,5 +42,17 @@ export class UserService {
     return this.http.get('/api/checkUser?username='+username).map((res:Response) => res.json());
   }
 
+  getPendingAccounts() {
+    //call to get the pending accounts
+  }
+
+  acceptAccount(account) {
+    //accept account
+  }
+
+  rejectAccount(account) {
+    //reject account
+  }  
+
 
 }

@@ -20,6 +20,9 @@ import { ViewPoisComponent } from './view-pois/view-pois.component';
 import { PoiDetailComponent } from './poi-detail/poi-detail.component';
 import { PoiReportComponent } from './poi-report/poi-report.component';
 import { ChooseFunctionalityComponent } from './choose-functionality/choose-functionality.component';
+import { UtilityService } from './_services/utility.service';
+import { DataService } from './_services/data.service';
+import { LocationService } from './_services/location.service';
 
 @NgModule({
   declarations: [
@@ -46,6 +49,9 @@ import { ChooseFunctionalityComponent } from './choose-functionality/choose-func
   providers: [
     AuthGuard,
     UserService,
+    UtilityService,
+    DataService,
+    LocationService,
     BaseRequestOptions
   ],
   bootstrap: [AppComponent]

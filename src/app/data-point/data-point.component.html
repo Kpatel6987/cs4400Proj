@@ -1,4 +1,5 @@
 <div clas="container">
+<h2>Create New Data Point</h2>
   <form name="form" (ngSubmit)="f.form.valid && submit()" #f="ngForm" novalidate>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !location.valid }">
         <label for="location">POI Location Name</label>
