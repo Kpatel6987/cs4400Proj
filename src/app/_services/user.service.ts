@@ -38,7 +38,7 @@ export class UserService {
   }
 
   checkUser(username) {
-    console.log(username);
+    //console.log(username);
     return this.http.get('/api/checkUser?username='+username).map((res:Response) => res.json());
   }
 

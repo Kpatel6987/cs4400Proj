@@ -15,7 +15,7 @@ export class DataService {
   ) {}
 
   createDataPoint(model) {
-      //call to insert new data point
+      return this.http.post('api/addDataPoint', model, {}).map(res => res.json());
   }
 
   getPendingPoints() {

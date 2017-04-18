@@ -13,8 +13,8 @@ import { DataService } from '../_services/data.service';
 export class DataPointComponent implements OnInit {
 
   model: any = {};
-  cities = ['Atl', 'Bos', 'SF'];
-  types = ['1', '2'];
+  types;
+  locations;
   validation = /^\d{5}$/;
 
   constructor(
@@ -25,15 +25,18 @@ export class DataPointComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    //TODO
-    //this.cities =  this.utilityService.getCities();
-    //this.types =  this.utilityService.getDataTypes();
+    this.types =  this.utilityService.getDataTypes();
+    this.locations =  this.utilityService.getLocations();
   }
 
   submit() {
     this.model.datetime = this.model.date + " " + this.model.time;
-    console.log(this.model);
-    //this.router.navigate(["/login"]);
-    //this.dataService.createDataPoint(this.model);
+    this.dataService.createDataPoint(this.model).subscribe(data => {
+      this.model = {};
+      alert("Success");
+      this.router.navigate(["/home"]);
+    },
+    err => alert("error " + err)
+    );
   }
 }

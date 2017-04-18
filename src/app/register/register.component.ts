@@ -33,12 +33,12 @@ export class RegisterComponent implements OnInit {
         console.log(data);
         if (data.length == 0) {
           this.userService.register(this.model).subscribe(
-            data => console.log(data),
-            () => {
+            data => {
               this.model = {};
               alert("Success");
               this.router.navigate(["/login"]);
-            }
+            },
+            err => alert("That email already exists")
           );
         } else {
             alert("That username already exists");

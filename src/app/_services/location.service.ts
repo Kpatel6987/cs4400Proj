@@ -14,12 +14,8 @@ export class LocationService {
     private http: Http
   ) {}
 
-  getCities() {
-      //call to get cities
-  }
-
-  getDataTypes() {
-      //call to get data types
+  createPoiLocation(model) {
+    return this.http.post('api/addPOILocation', model, {}).map(res => res.json());
   }
 
 }

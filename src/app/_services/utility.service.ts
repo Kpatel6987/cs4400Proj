@@ -15,11 +15,22 @@ export class UtilityService {
   ) {}
 
   getCities() {
-      //call to get cities
+      return this.http.get('/api/cityList').map((res:Response) => res.json());
+  }
+
+  getStates() {
+      return this.http.get('/api/stateList').map((res:Response) => res.json());
   }
 
   getDataTypes() {
-      //call to get data types
+      return this.http.get('/api/typeList').map((res:Response) => res.json());
   }
 
+  getLocations() {
+      return this.http.get('/api/locationList').map((res:Response) => res.json());
+  }
+
+  checkCityState(city, state) {
+      return this.http.get('/api/checkCityState?city='+ city + '&state='+state).map((res:Response) => res.json());
+  }
 }

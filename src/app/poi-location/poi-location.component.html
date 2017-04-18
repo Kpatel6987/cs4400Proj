@@ -8,16 +8,16 @@
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted }">
         <label>City</label>
         <select for="city" name="city" [(ngModel)]="model.city" required>
-            <option *ngFor="let city of cities" [ngValue]="city">{{city}}</option>
+            <option *ngFor="let city of cities | async" [ngValue]="city">{{city.City}}</option>
         </select>
         <div *ngIf="f.submitted && !city == ''" class="help-block">City is required</div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted }">
-        <label>Data Type</label>
-        <select for="dataType" name="dataType" [(ngModel)]="model.dataType" required>
-            <option *ngFor="let type of types" [ngValue]="type">{{type}}</option>
+        <label>State</label>
+        <select for="state" name="state" [(ngModel)]="model.state" required>
+            <option *ngFor="let s of states | async" [ngValue]="s">{{s.State}}</option>
         </select>
-        <div *ngIf="f.submitted && !dataType == ''" class="help-block">Data Type is required</div>
+        <div *ngIf="f.submitted && !state == ''" class="help-block">State is required</div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !zipcode.valid }">
         <label for="zipcode">Zip Code</label>
@@ -25,7 +25,7 @@
         <div *ngIf="f.submitted && !zipcode.valid" class="help-block">Zip Code must be a 5 digit number</div>
     </div>
     <div class="form-group">
-        <button [routerLink]="['/home']" class="btn btn-danger">Cancel</button>
+        <button [routerLink]="['/home']" type="button" class="btn btn-danger">Cancel</button>
         <button [disabled]="loading" class="btn btn-primary">Submit</button>
     </div>
   </form>

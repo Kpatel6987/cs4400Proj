@@ -54,6 +54,72 @@ router.get("/checkUser", function(req, res) {
     });
 });
 
+router.get("/checkCityState", function(req, res) {
+    con.query("SELECT * FROM CityState WHERE City = ? and State = ?",
+        [req.query.city, req.query.state], function(err, response){
+        if (err)
+            res.json(err);
+        res.json(response);
+    });
+});
+
+router.get("/cityList", function(req, res) {
+    con.query('SELECT DISTINCT City FROM CityState ORDER BY City',function(err,rows) {
+        if(err)
+            console.log("Error Selecting : %s ",err );
+        res.json(rows);
+    });
+});
+
+router.get("/stateList", function(req, res) {
+    con.query('SELECT DISTINCT State FROM CityState ORDER BY State',function(err,rows) {
+        if(err)
+            console.log("Error Selecting : %s ",err );
+        res.json(rows);
+    });
+});
+
+router.get("/locationList", function(req, res) {
+    con.query('SELECT LocationName FROM POI',function(err,rows) {
+        if(err)
+            console.log("Error Selecting : %s ",err );
+        res.json(rows);
+    });
+});
+
+router.get("/typeList", function(req, res) {
+    con.query('SELECT Type FROM DataType',function(err,rows) {
+        if(err)
+            console.log("Error Selecting : %s ",err );
+        res.json(rows);
+    });
+});
+
+router.post("/addDataPoint", function(req, res) {
+    var datetime = req.body.datetime;
+    var value = req.body.value;
+    var location = req.body.location;
+    var accepted = false;
+    var dataType = req.body.dataType;
+    con.query("INSERT INTO DataPoint VALUES (?, ?, ?, ?, ?)",
+     [datetime, accepted, value, location, dataType], function(err, resp) {
+        if (err) {
+            console.log(err);
+        }
+        res.json(resp);
+     });
+});
+
+router.post("/addPOILocation", function(req, res) {
+    con.query("INSERT INTO POI SET LocationName = ?, ZipCode = ?, Flag = false, City = ?, State = ?",
+     [req.body.location, req.body.zipcode, req.body.city, req.body.state], function(err, resp) {
+        if (err) {
+            console.log(err);
+        }
+        res.json(resp);
+     });
+});
+
 /* !!!!!!!!!      EVERYTHING BELOW THIS LINE IS FROM 2340     !!!!!!!!!! */
 
 /* GET api listing. */
