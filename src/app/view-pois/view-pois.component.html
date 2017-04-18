@@ -1,19 +1,15 @@
 <div clas="container">
   <form name="form" (ngSubmit)="f.form.valid && submit()" #f="ngForm" novalidate>
     <div class="form-group">
-        <label for="location">POI Location Name</label>
-        <input type="text" class="form-control" name="location" [(ngModel)]="model.location" #location="ngModel" />
+        <label>POI Location</label>
+        <select for="location" name="location" [(ngModel)]="model.location">
+            <option *ngFor="let l of locations" [ngValue]="l.LocationName">{{l.LocationName}</option>
+        </select>
     </div>
     <div class="form-group">
         <label>City</label>
         <select for="city" name="city" [(ngModel)]="model.city">
-            <option *ngFor="let city of cities" [ngValue]="city">{{city}}</option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label>Data Type</label>
-        <select for="dataType" name="dataType" [(ngModel)]="model.dataType">
-            <option *ngFor="let type of types" [ngValue]="type">{{type}}</option>
+            <option *ngFor="let city of cities | async" [ngValue]="city.City">{{city.City}}</option>
         </select>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted && !zipcode.valid }">
@@ -34,8 +30,33 @@
         <input type="date" class="form-control" name="date" [(ngModel)]="model.dateTo" #date="ngModel"/>
     </div>
     <div class="form-group">
-        <button [routerLink]="['/home']" class="btn btn-danger">Cancel</button>
-        <button [disabled]="loading" class="btn btn-primary">Submit</button>
+        <button [disabled]="loading" type="submit" class="btn btn-primary">Apply Filter</button>
     </div>
   </form>
+<button (click)="clear()" class="btn btn-danger">Clear Filter</button>
+
+
+  <table class="table" *ngIf="displayTable">
+    <thead>
+      <tr>
+        <th>POI Location</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Zip Code</th>
+        <th>Flagged</th>
+        <th>Date Flagged</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let poi of pois | async">
+        <td>{{ poi.LocationName }}</td>
+        <td>{{ poi.City }}</td>
+        <td>{{ poi.State }}</td>
+        <td>{{ poi.Zipcode }}</td>
+        <td>{{ poi.Flagged }}</td>
+        <td>{{ poi.DataFlagged | date: 'medium' }}</td>
+      </tr>
+    </tbody>
+  </table>
+
 </div>

@@ -206,6 +206,33 @@ router.post("/rejectDataPoint", function(req, res) {
      });
 });
 
+router.get("/filterPOIs", function(req, res) {
+    console.log(req.query);
+    var q = "";
+    var and = "";
+    var query = "";
+    if (Object.keys(req.query).length > 0)
+        q = " WHERE ";
+    if (Object.keys(req.query).length > 1)
+        and = " AND ";
+    
+    var count = 0;
+    for (var propName in req.query) {
+        if (req.query.hasOwnProperty(propName)) {
+            query = query + propName + " = " + req.query[propName];
+        }
+        count++
+        if (count != Object.keys(req.query).length)
+            query = query + and;
+    }
+    console.log(query);
+
+    // con.query('SELECT * FROM POI' + q,function(err,rows) {
+    //     if(err)
+    //         console.log("Error Selecting : %s ",err );
+    //     res.json(rows);
+    // });
+});
 /* !!!!!!!!!      EVERYTHING BELOW THIS LINE IS FROM 2340     !!!!!!!!!! */
 
 /* GET api listing. */

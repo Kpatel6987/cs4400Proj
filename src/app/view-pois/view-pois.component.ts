@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { UtilityService } from '../_services/utility.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { LocationService } from '../_services/location.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-view-pois',
@@ -8,14 +12,31 @@ import { Component, OnInit } from '@angular/core';
 export class ViewPoisComponent implements OnInit {
 
   model: any = {};
-  types = ['Mold', 'Air Quality'];
+  cities;
+  locations;
+  displayTable = false;
   
-  constructor() { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private utilityService: UtilityService,
+    private locationService: LocationService,
+    private datePipe: DatePipe
+  ) { }
 
   ngOnInit() {
+    this.cities = this.utilityService.getCities();
+    this.locations = this.utilityService.getLocations();
   }
 
   submit() {
     console.log(this.model);
+    this.locationService.filterPOIs(this.model).subscribe(data => console.log(data));
+    this.displayTable = true;
+  }
+
+  clear() {
+    this.model = {};
+    this.displayTable = false;
   }
 }

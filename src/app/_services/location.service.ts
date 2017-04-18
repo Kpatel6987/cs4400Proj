@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Observable } from 'rxjs/Observable';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Http, Response } from '@angular/http';
+import { Http, Response, URLSearchParams, QueryEncoder } from '@angular/http';
 
 
 @Injectable()
@@ -16,6 +16,23 @@ export class LocationService {
 
   createPoiLocation(model) {
     return this.http.post('api/addPOILocation', model, {}).map(res => res.json());
+  }
+
+  filterPOIs(model) {
+    let params: URLSearchParams = new URLSearchParams();
+    if (model.location != null)
+      params.set('LocationName', model.location);
+    if (model.city != null)
+      params.set('City', model.city);
+    if (model.zipcode != null)
+      params.set('ZipCode', model.zipcode);
+    if (model.flagged != null)
+      params.set('Flag', model.flagged);
+    if (model.dateFrom != null)
+      params.set('dateFrom', model.dateFrom);
+    if (model.dateTo != null)
+      params.set('dateTo', model.dateTo);
+    return this.http.get('api/filterPOIs', {search: params}).map((res:Response) => res.json());
   }
 
 }
