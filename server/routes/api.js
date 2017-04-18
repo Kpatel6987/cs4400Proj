@@ -187,9 +187,8 @@ router.get("/pendingDataPoints", function(req, res) {
 });
 
 router.post("/acceptDataPoint", function(req, res) {
-    console.log(req.body.DateStamp);
-    con.query("UPDATE DataPoint SET Accepted = true WHERE LocationName = ? and DateStamp = STR_TO_DATE(?, '%d.%m.%y')",
-     [req.body.LocationName, req.body.DateStamp], function(err, resp) {
+    con.query("UPDATE DataPoint SET Accepted = true WHERE LocationName = ? and DateStamp = ?",
+     [req.body.LocationName, req.body.DateTime], function(err, resp) {
         if (err) {
             console.log(err);
         }
@@ -199,7 +198,7 @@ router.post("/acceptDataPoint", function(req, res) {
 
 router.post("/rejectDataPoint", function(req, res) {
     con.query("UPDATE DataPoint SET Accepted = NULL WHERE LocationName = ? and DateStamp = ?",
-     [req.body.LocationName, req.body.DateStamp], function(err, resp) {
+     [req.body.LocationName, req.body.DateTime], function(err, resp) {
         if (err) {
             console.log(err);
         }
