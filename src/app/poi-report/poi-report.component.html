@@ -1,3 +1,37 @@
-<p>
-  poi-report works!
-</p>
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>POI Location</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Mold Min</th>
+        <th>Mold Avg</th>
+        <th>Mold Max</th>
+        <th>AQ Min</th>
+        <th>AQ Avg</th>
+        <th>AQ Max</th>
+        <th># of Data Points</th>
+        <th>Flagged</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let poi of pois | async">
+        <td>{{ point.LocationName }}</td>
+        <td>{{ point.Type }}</td>
+        <td>{{ point.DataValue }}</td>
+        <td>{{ point.LocationName }}</td>
+        <td>{{ point.Type }}</td>
+        <td>{{ point.DataValue }}</td>
+        <td>{{ point.LocationName }}</td>
+        <td>{{ point.Type }}</td>
+        <td>{{ point.DataValue }}</td>
+        <td>{{ point.Type }}</td>
+        <td>{{ point.DataValue }}</td>
+        <td>
+          <button type="button" class="btn btn-success" (click)="accept(point)">Accept</button>
+          <button type="button" class="btn btn-danger" (click)="reject(point)">Reject</button>
+        </td>
+      </tr>
+    </tbody>
+</div>

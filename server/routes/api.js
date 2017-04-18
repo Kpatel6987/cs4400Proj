@@ -76,7 +76,7 @@ router.get("/checkUser", function(req, res) {
 
 router.get("/checkCityOfficial", function(req, res) {
     var CityOfficialname = req.query.username;
-    con.query("SELECT * FROM User WHERE Username = ?",
+    con.query("SELECT * FROM CityOfficial WHERE Username = ?",
         CityOfficialname, function(err, response){
         if (err)
             res.json(err);

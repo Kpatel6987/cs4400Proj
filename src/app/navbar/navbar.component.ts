@@ -11,6 +11,7 @@ export class NavbarComponent {
 
   showNavBar: boolean = false;
   userType;
+  accepted;
 
   constructor(
     private router: Router,
@@ -28,7 +29,7 @@ export class NavbarComponent {
       }
         
       });
-
+      this.accepted = localStorage.getItem('approved');
       this.userType = localStorage.getItem('type');
   }
 

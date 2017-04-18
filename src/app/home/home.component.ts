@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.userType = localStorage.getItem('type');
-    this.accepted = localStorage.getItem('accepted');
+    this.accepted = localStorage.getItem('approved');
   }
 
 }

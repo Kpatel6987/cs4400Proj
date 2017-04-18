@@ -31,6 +31,7 @@ export class LoginComponent implements OnInit {
                 } else {
                     if (data[0].UserType == "City Official") {
                         this.userService.checkCityOfficial(data[0].Username).subscribe(d => {
+                            console.log(d[0]);
                             if (d[0].Approved == null) {
                                 alert("Account has been rejected");
                             } else {
@@ -40,6 +41,8 @@ export class LoginComponent implements OnInit {
                                 localStorage.setItem('type', data[0].UserType);
                                 if (d[0].Approved == false)
                                     localStorage.setItem('approved', 'false');
+                                else 
+                                    localStorage.setItem('approved', 'true');
                                 console.log(data)
                             }
                         })
