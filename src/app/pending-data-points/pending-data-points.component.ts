@@ -21,11 +21,11 @@ export class PendingDataPointsComponent implements OnInit {
   }
 
   accept(point) {
-    this.dataService.acceptPoint(point);
+    this.dataService.acceptPoint(point).subscribe(data => console.log(data));
   }
 
   reject(point) {
-    this.dataService.rejectPoint(point);
+    this.dataService.rejectPoint(point).subscribe();
   }
 
 }

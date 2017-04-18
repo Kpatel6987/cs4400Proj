@@ -7,11 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   userType;
-
+  accepted;
+  
   constructor() { }
 
   ngOnInit() {
     this.userType = localStorage.getItem('type');
+    this.accepted = localStorage.getItem('accepted');
   }
 
 }

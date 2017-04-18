@@ -23,7 +23,7 @@ export class DataService {
   }
 
   acceptPoint(point) {
-    return this.http.post('api/acceptDataPoint', point, {}).map(res => res.json());
+    return this.http.post('api/acceptDataPoint', point).map(res => res.json());
   }
 
   rejectPoint(point) {

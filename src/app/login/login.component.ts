@@ -29,11 +29,27 @@ export class LoginComponent implements OnInit {
                 if (data.length == 0 || data[0].Username == null || data[0].Username == undefined) {
                     alert("Invalid");
                 } else {
-                    this.userService.showNavBar(true);
-                    this.router.navigate(["/home"]);
-                    localStorage.setItem('user', data[0].Username);
-                    localStorage.setItem('type', data[0].UserType);
-                    console.log(data)
+                    if (data[0].UserType == "City Official") {
+                        this.userService.checkCityOfficial(data[0].Username).subscribe(d => {
+                            if (d[0].Approved == null) {
+                                alert("Account has been rejected");
+                            } else {
+                                this.userService.showNavBar(true);
+                                this.router.navigate(["/home"]);
+                                localStorage.setItem('user', data[0].Username);
+                                localStorage.setItem('type', data[0].UserType);
+                                if (d[0].Approved == false)
+                                    localStorage.setItem('approved', 'false');
+                                console.log(data)
+                            }
+                        })
+                    } else {
+                        this.userService.showNavBar(true);
+                        this.router.navigate(["/home"]);
+                        localStorage.setItem('user', data[0].Username);
+                        localStorage.setItem('type', data[0].UserType);
+                        console.log(data)
+                    }
                 }
                
             });

@@ -74,6 +74,16 @@ router.get("/checkUser", function(req, res) {
     });
 });
 
+router.get("/checkCityOfficial", function(req, res) {
+    var CityOfficialname = req.query.username;
+    con.query("SELECT * FROM User WHERE Username = ?",
+        CityOfficialname, function(err, response){
+        if (err)
+            res.json(err);
+        res.json(response);
+    });
+});
+
 router.get("/checkCityState", function(req, res) {
     con.query("SELECT * FROM CityState WHERE City = ? and State = ?",
         [req.query.city, req.query.state], function(err, response){
@@ -177,7 +187,8 @@ router.get("/pendingDataPoints", function(req, res) {
 });
 
 router.post("/acceptDataPoint", function(req, res) {
-    con.query("UPDATE DataPoint SET Accepted = true WHERE LocationName = ? and DateStamp = ?",
+    console.log(req.body.DateStamp);
+    con.query("UPDATE DataPoint SET Accepted = true WHERE LocationName = ? and DateStamp = STR_TO_DATE(?, '%d.%m.%y')",
      [req.body.LocationName, req.body.DateStamp], function(err, resp) {
         if (err) {
             console.log(err);
