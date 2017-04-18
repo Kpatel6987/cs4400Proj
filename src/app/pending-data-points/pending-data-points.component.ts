@@ -17,15 +17,15 @@ export class PendingDataPointsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    //this.points = this.dataService.getPendingPoints();
+    this.points = this.dataService.getPendingPoints();
   }
 
   accept(point) {
-    //this.dataService.acceptPoint(point);
+    this.dataService.acceptPoint(point);
   }
 
   reject(point) {
-    //this.dataService.rejectPoint(point);
+    this.dataService.rejectPoint(point);
   }
 
 }

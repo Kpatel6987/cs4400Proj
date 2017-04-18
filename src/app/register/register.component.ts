@@ -30,10 +30,10 @@ export class RegisterComponent implements OnInit {
     }
     this.userService.checkUser(this.model.username).subscribe(data =>
       {
-        console.log(data);
         if (data.length == 0) {
           this.userService.register(this.model).subscribe(
             data => {
+              this.addCityOfficial(this.model);
               this.model = {};
               alert("Success");
               this.router.navigate(["/login"]);
@@ -44,7 +44,10 @@ export class RegisterComponent implements OnInit {
             alert("That username already exists");
         }
       });
-    
+  }
+
+  addCityOfficial(model) {
+    this.userService.registerCityOfficial(model).subscribe(err => console.log("There was an error"));
   }
 
 }

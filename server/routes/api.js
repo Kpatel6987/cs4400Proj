@@ -18,6 +18,14 @@ con.connect(function(err) {
     console.log("Successfully connected to 4400 DB");
 });
 
+router.get("/cityOfficialList", function(req, res) {
+    con.query('SELECT * FROM CityOfficial',function(err,rows) {
+    if(err)
+        console.log("Error Selecting : %s ",err );
+        res.json(rows);
+        });
+});
+
 router.post("/addUser", function(req, res) {
     var username = req.body.username;
     var password = req.body.password;
@@ -25,6 +33,18 @@ router.post("/addUser", function(req, res) {
     var userType = req.body.userType;
     con.query("INSERT INTO User VALUES (?, ?, ?, ?)",
      [username, email, password, userType], function(err, resp) {
+        if (err) {
+            console.log("Error " + err);
+        }
+        res.json(resp);
+     });
+});
+
+router.post("/addCityOfficial", function(req, res) {
+    var username = req.body.username;
+    var password = req.body.password;
+    con.query("INSERT INTO CityOfficial VALUES (?, ?, ?, ?, ?)",
+     [username, req.body.title, false, req.body.state, req.body.state], function(err, resp) {
         if (err) {
             console.log("Error " + err);
         }
@@ -113,6 +133,62 @@ router.post("/addDataPoint", function(req, res) {
 router.post("/addPOILocation", function(req, res) {
     con.query("INSERT INTO POI SET LocationName = ?, ZipCode = ?, Flag = false, City = ?, State = ?",
      [req.body.location, req.body.zipcode, req.body.city, req.body.state], function(err, resp) {
+        if (err) {
+            console.log(err);
+        }
+        res.json(resp);
+     });
+});
+
+router.get("/pendingAccounts", function(req, res) {
+    con.query('SELECT Username, Email, Title, City, State FROM CityOfficial NATURAL JOIN User WHERE Approved = false',function(err,rows) {
+        if(err)
+            console.log("Error Selecting : %s ",err );
+        res.json(rows);
+    });
+});
+
+router.post("/acceptAccount", function(req, res) {
+    con.query("UPDATE CityOfficial SET Approved = true WHERE Username = ?",
+     [req.body.Username], function(err, resp) {
+        if (err) {
+            console.log(err);
+        }
+        res.json(resp);
+     });
+});
+
+router.post("/rejectAccount", function(req, res) {
+    con.query("UPDATE CityOfficial SET Approved = NULL WHERE Username = ?",
+     [req.body.Username], function(err, resp) {
+        if (err) {
+            console.log(err);
+        }
+        res.json(resp);
+     });
+});
+
+router.get("/pendingDataPoints", function(req, res) {
+    con.query('SELECT DateStamp, DataValue, LocationName, Type FROM DataPoint WHERE Accepted = false',function(err,rows) {
+        if(err)
+            console.log("Error Selecting : %s ",err );
+        res.json(rows);
+    });
+});
+
+router.post("/acceptDataPoint", function(req, res) {
+    con.query("UPDATE DataPoint SET Accepted = true WHERE LocationName = ? and DateStamp = ?",
+     [req.body.LocationName, req.body.DateStamp], function(err, resp) {
+        if (err) {
+            console.log(err);
+        }
+        res.json(resp);
+     });
+});
+
+router.post("/rejectDataPoint", function(req, res) {
+    con.query("UPDATE DataPoint SET Accepted = NULL WHERE LocationName = ? and DateStamp = ?",
+     [req.body.LocationName, req.body.DateStamp], function(err, resp) {
         if (err) {
             console.log(err);
         }

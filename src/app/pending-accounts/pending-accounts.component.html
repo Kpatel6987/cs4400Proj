@@ -13,11 +13,11 @@
     </thead>
     <tbody>
       <tr *ngFor="let account of accounts | async">
-        <td>{{ account.userame }}</td>
-        <td>{{ account.email }}</td>
-        <td>{{ account.city }}</td>
-        <td>{{ account.state }}</td>
-        <td>{{ account.title }}</td>
+        <td>{{ account.Username }}</td>
+        <td>{{ account.Email }}</td>
+        <td>{{ account.City }}</td>
+        <td>{{ account.State }}</td>
+        <td>{{ account.Title }}</td>
         <td>
           <button type="button" class="btn btn-success" (click)="accept(account)">Accept</button>
           <button type="button" class="btn btn-danger" (click)="reject(account)">Reject</button>

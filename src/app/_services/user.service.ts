@@ -35,6 +35,12 @@ export class UserService {
 
   register(model) {
     return this.http.post('api/addUser', model, {}).map(res => res.json());
+
+
+  }
+
+  registerCityOfficial(model) {
+    return this.http.post('api/addCityOfficial', model, {}).map(res => res.json());
   }
 
   checkUser(username) {
@@ -43,15 +49,15 @@ export class UserService {
   }
 
   getPendingAccounts() {
-    //call to get the pending accounts
+    return this.http.get('/api/pendingAccounts').map((res:Response) => res.json());
   }
 
   acceptAccount(account) {
-    //accept account
+    return this.http.post('api/acceptAccount', account, {}).map(res => res.json());
   }
 
   rejectAccount(account) {
-    //reject account
+    return this.http.post('api/rejectAccount', account, {}).map(res => res.json());
   }  
 
 

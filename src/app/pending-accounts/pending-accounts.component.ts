@@ -18,11 +18,11 @@ export class PendingAccountsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    //this.accounts = this.userService.getPendingAccounts();
+    this.accounts = this.userService.getPendingAccounts();
   }
 
   accept(account) {
-    //this.userService.acceptAccount(account);
+    this.userService.acceptAccount(account);
   }
 
   reject(account) {

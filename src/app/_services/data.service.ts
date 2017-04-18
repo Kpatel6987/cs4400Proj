@@ -19,14 +19,14 @@ export class DataService {
   }
 
   getPendingPoints() {
-    //call to get the pending points
+    return this.http.get('/api/pendingDataPoints').map((res:Response) => res.json());
   }
 
   acceptPoint(point) {
-    //accept point
+    return this.http.post('api/acceptDataPoint', point, {}).map(res => res.json());
   }
 
-  rejectPointt(point) {
-    //reject point
+  rejectPoint(point) {
+    return this.http.post('api/rejectDataPoint', point, {}).map(res => res.json());
   }  
 }

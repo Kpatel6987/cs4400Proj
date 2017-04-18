@@ -12,10 +12,10 @@
     </thead>
     <tbody>
       <tr *ngFor="let point of points | async">
-        <td>{{ point.location }}</td>
-        <td>{{ point.type }}</td>
-        <td>{{ point.value }}</td>
-        <td>{{ point.datetime }}</td>
+        <td>{{ point.LocationName }}</td>
+        <td>{{ point.Type }}</td>
+        <td>{{ point.DataValue }}</td>
+        <td>{{ point.DateStamp | date:'medium' }}</td>
         <td>
           <button type="button" class="btn btn-success" (click)="accept(point)">Accept</button>
           <button type="button" class="btn btn-danger" (click)="reject(point)">Reject</button>
