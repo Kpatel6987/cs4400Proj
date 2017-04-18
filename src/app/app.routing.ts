@@ -6,7 +6,6 @@ import { AuthGuard } from './_guards/auth.guard';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { ChooseFunctionalityComponent } from './choose-functionality/choose-functionality.component';
 
 // Pois & Data
 import { PoiLocationComponent } from './poi-location/poi-location.component';
