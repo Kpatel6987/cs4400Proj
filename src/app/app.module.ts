@@ -19,7 +19,6 @@ import { PendingAccountsComponent } from './pending-accounts/pending-accounts.co
 import { ViewPoisComponent } from './view-pois/view-pois.component';
 import { PoiDetailComponent } from './poi-detail/poi-detail.component';
 import { PoiReportComponent } from './poi-report/poi-report.component';
-import { ChooseFunctionalityComponent } from './choose-functionality/choose-functionality.component';
 import { UtilityService } from './_services/utility.service';
 import { DataService } from './_services/data.service';
 import { LocationService } from './_services/location.service';
@@ -37,8 +36,7 @@ import { LocationService } from './_services/location.service';
     PendingAccountsComponent,
     ViewPoisComponent,
     PoiDetailComponent,
-    PoiReportComponent,
-    ChooseFunctionalityComponent
+    PoiReportComponent
   ],
   imports: [
     BrowserModule,
