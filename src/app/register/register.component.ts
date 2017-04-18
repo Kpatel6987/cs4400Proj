@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { UserService } from '../_services/user.service';
+import { UtilityService } from '../_services/utility.service';
 
 @Component({
   selector: 'app-register',
@@ -10,17 +11,20 @@ import { UserService } from '../_services/user.service';
 export class RegisterComponent implements OnInit {
 
   model: any = {};
-  cities = ['Atl', 'Bos', 'SF'];
-  states = ['GA', 'FL', 'CA'];
+  cities;
+  states;
   types = ['City Official', 'City Scientist'];
   
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private utilityService: UtilityService
   ) { }
 
   ngOnInit() {
+    this.cities = this.utilityService.getCities();
+    this.states = this.utilityService.getStates();
   }
 
   register() {
@@ -28,6 +32,21 @@ export class RegisterComponent implements OnInit {
       alert("Passwords do not match");
       return false;
     }
+    if (this.model.userType == "City Official") {
+      this.utilityService.checkCityState(this.model.city, this.model.state).subscribe(data => {
+        if (data.length > 0) {
+          this.registerUser();
+        } else {
+          alert("That is an invalid City State combination");
+        }
+      });
+    } else {
+      this.registerUser();
+    }
+    
+  }
+
+  registerUser() {
     this.userService.checkUser(this.model.username).subscribe(data =>
       {
         if (data.length == 0) {
