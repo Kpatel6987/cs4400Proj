@@ -14,6 +14,7 @@ export class ViewPoisComponent implements OnInit {
   model: any = {};
   cities;
   locations;
+  pois;
   displayTable = false;
   
   constructor(
@@ -30,8 +31,7 @@ export class ViewPoisComponent implements OnInit {
   }
 
   submit() {
-    console.log(this.model);
-    this.locationService.filterPOIs(this.model).subscribe(data => console.log(data));
+    this.pois = this.locationService.filterPOIs(this.model);
     this.displayTable = true;
   }
 

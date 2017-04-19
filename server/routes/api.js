@@ -207,31 +207,35 @@ router.post("/rejectDataPoint", function(req, res) {
 });
 
 router.get("/filterPOIs", function(req, res) {
-    console.log(req.query);
-    var q = "";
     var and = "";
     var query = "";
     if (Object.keys(req.query).length > 0)
-        q = " WHERE ";
+        query = " WHERE ";
     if (Object.keys(req.query).length > 1)
         and = " AND ";
-    
+    var values = [];
     var count = 0;
     for (var propName in req.query) {
         if (req.query.hasOwnProperty(propName)) {
-            query = query + propName + " = " + req.query[propName];
+            values.push(req.query[propName]);
+            if (propName == 'dateFrom') {
+                query = query + "DateStamp >= ?";
+            } else if (propName == 'dateTo') {
+                query = query + "DateStamp <= ?";
+            } else {
+                query = query + propName + " = ?";
+            }
         }
         count++
         if (count != Object.keys(req.query).length)
             query = query + and;
     }
-    console.log(query);
 
-    // con.query('SELECT * FROM POI' + q,function(err,rows) {
-    //     if(err)
-    //         console.log("Error Selecting : %s ",err );
-    //     res.json(rows);
-    // });
+    con.query('SELECT * FROM POI' + query, values, function(err,rows) {
+        if(err)
+            console.log("Error Selecting : %s ",err );
+        res.json(rows);
+    });
 });
 /* !!!!!!!!!      EVERYTHING BELOW THIS LINE IS FROM 2340     !!!!!!!!!! */
 

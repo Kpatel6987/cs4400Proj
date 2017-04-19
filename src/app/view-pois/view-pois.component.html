@@ -3,7 +3,7 @@
     <div class="form-group">
         <label>POI Location</label>
         <select for="location" name="location" [(ngModel)]="model.location">
-            <option *ngFor="let l of locations" [ngValue]="l.LocationName">{{l.LocationName}</option>
+            <option *ngFor="let l of locations | async" [ngValue]="l.LocationName">{{l.LocationName}}</option>
         </select>
     </div>
     <div class="form-group">
@@ -52,9 +52,9 @@
         <td>{{ poi.LocationName }}</td>
         <td>{{ poi.City }}</td>
         <td>{{ poi.State }}</td>
-        <td>{{ poi.Zipcode }}</td>
-        <td>{{ poi.Flagged }}</td>
-        <td>{{ poi.DataFlagged | date: 'medium' }}</td>
+        <td>{{ poi.ZipCode }}</td>
+        <td>{{ poi.Flag }}</td>
+        <td>{{ poi.DateFlagged | date: 'medium' }}</td>
       </tr>
     </tbody>
   </table>
