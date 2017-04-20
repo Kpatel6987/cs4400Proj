@@ -335,6 +335,10 @@ router.get("/poiDetail", function(req, res) {
                 query = query + "DateStamp >= ?";
             } else if (propName == 'dateTo') {
                 query = query + "DateStamp <= ?";
+            } else if (propName == 'valueFrom') {
+                query = query + "DataValue >= ?";
+            } else if (propName == 'valueTo') {
+                query = query + "DataValue <= ?";
             } else {
                 query = query + propName + " = ?";
             }
@@ -344,7 +348,7 @@ router.get("/poiDetail", function(req, res) {
             query = query + and;
     }
 
-    con.query('SELECT * FROM POI' + query, values, function(err,rows) {
+    con.query('SELECT * FROM DataPoint' + query, values, function(err,rows) {
         if(err)
             console.log("Error Selecting : %s ",err );
         res.json(rows);

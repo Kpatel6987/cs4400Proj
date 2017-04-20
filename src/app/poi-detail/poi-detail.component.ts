@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { UtilityService } from '../_services/utility.service';
+import { LocationService } from '../_services/location.service';
 
 @Component({
   selector: 'app-poi-detail',
@@ -18,7 +19,8 @@ export class PoiDetailComponent implements OnInit {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private utilityService: UtilityService
+    private utilityService: UtilityService,
+    private locationService: LocationService
   ) { }
 
   ngOnInit() {
@@ -31,6 +33,7 @@ export class PoiDetailComponent implements OnInit {
   submit() {
     this.model.location = this.location;
     console.log(this.model);
+    this.points = this.locationService.poiDetail(this.model);
     this.displayTable = true;
   }
 

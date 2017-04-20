@@ -35,4 +35,21 @@ export class LocationService {
     return this.http.get('api/filterPOIs', {search: params}).map((res:Response) => res.json());
   }
 
+  poiDetail(model) {
+    let params: URLSearchParams = new URLSearchParams();
+    if (model.location != null)
+      params.set('LocationName', model.location);
+    if (model.dataType != null)
+      params.set('Type', model.dataType);
+    if (model.valueFrom != null)
+      params.set('valueFrom', model.valueFrom);
+    if (model.valueTo != null)
+      params.set('valueTo', model.valueTo);
+    if (model.dateFrom != null)
+      params.set('dateFrom', model.dateFrom);
+    if (model.dateTo != null)
+      params.set('dateTo', model.dateTo);
+    return this.http.get('api/poiDetail', {search: params}).map((res:Response) => res.json());
+  }
+
 }
