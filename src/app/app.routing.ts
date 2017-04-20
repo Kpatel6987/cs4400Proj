@@ -12,6 +12,7 @@ import { PoiLocationComponent } from './poi-location/poi-location.component';
 import { PoiDetailComponent } from './poi-detail/poi-detail.component';
 import { ViewPoisComponent } from './view-pois/view-pois.component';
 import { DataPointComponent } from './data-point/data-point.component';
+import { PoiReportComponent } from './poi-report/poi-report.component';
 
 // Pending
 import { PendingAccountsComponent } from './pending-accounts/pending-accounts.component';
@@ -24,6 +25,7 @@ const appRoutes: Routes = [
     
     { path: 'poidetail', component: PoiDetailComponent, canActivate: [AuthGuard] },
     { path: 'viewpois', component: ViewPoisComponent, canActivate: [AuthGuard] },
+    { path: 'poireport', component: PoiReportComponent, canActivate: [AuthGuard] },
 
     { path: 'pendingaccounts', component: PendingAccountsComponent, canActivate: [AuthGuard] },
     { path: 'pendingdatapoints', component: PendingDataPointsComponent, canActivate: [AuthGuard] },
