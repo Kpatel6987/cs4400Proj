@@ -55,6 +55,7 @@
         <td>{{ poi.ZipCode }}</td>
         <td>{{ poi.Flag }}</td>
         <td>{{ poi.DateFlagged | date: 'medium' }}</td>
+        <td><a [routerLink]="['/poidetail', poi.LocationName]">View Details</a></td>
       </tr>
     </tbody>
   </table>

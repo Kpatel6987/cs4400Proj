@@ -22,6 +22,7 @@ import { PoiReportComponent } from './poi-report/poi-report.component';
 import { UtilityService } from './_services/utility.service';
 import { DataService } from './_services/data.service';
 import { LocationService } from './_services/location.service';
+import { PoiListComponent } from './poi-list/poi-list.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { LocationService } from './_services/location.service';
     PendingAccountsComponent,
     ViewPoisComponent,
     PoiDetailComponent,
-    PoiReportComponent
+    PoiReportComponent,
+    PoiListComponent
   ],
   imports: [
     BrowserModule,

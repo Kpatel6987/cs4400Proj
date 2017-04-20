@@ -1,0 +1,15 @@
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>POI Location Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let location of locations | async">
+        <td>{{ location.LocationName }}</td>
+        <td><a [routerLink]="['/poidetail', location.LocationName]">View Details</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

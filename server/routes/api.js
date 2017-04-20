@@ -319,4 +319,36 @@ router.get("/filterPOIs", function(req, res) {
     });
 });
 
+router.get("/poiDetail", function(req, res) {
+    var and = "";
+    var query = "";
+    if (Object.keys(req.query).length > 0)
+        query = " WHERE ";
+    if (Object.keys(req.query).length > 1)
+        and = " AND ";
+    var values = [];
+    var count = 0;
+    for (var propName in req.query) {
+        if (req.query.hasOwnProperty(propName)) {
+            values.push(req.query[propName]);
+            if (propName == 'dateFrom') {
+                query = query + "DateStamp >= ?";
+            } else if (propName == 'dateTo') {
+                query = query + "DateStamp <= ?";
+            } else {
+                query = query + propName + " = ?";
+            }
+        }
+        count++
+        if (count != Object.keys(req.query).length)
+            query = query + and;
+    }
+
+    con.query('SELECT * FROM POI' + query, values, function(err,rows) {
+        if(err)
+            console.log("Error Selecting : %s ",err );
+        res.json(rows);
+    });
+});
+
 module.exports = router;
