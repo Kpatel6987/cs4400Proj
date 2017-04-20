@@ -51,6 +51,15 @@ router.get("/checkCityState", function(req, res) {
     });
 });
 
+router.get("/checkFlagged", function(req, res) {
+    con.query("SELECT * FROM POI WHERE LocationName = ?",
+        [req.query.location], function(err, response){
+        if (err)
+            res.json(err);
+        res.json(response);
+    });
+});
+
 /***************************************************************************** 
                         REGISTRATION ENDPOINTS
 ******************************************************************************/
@@ -349,6 +358,42 @@ router.get("/poiDetail", function(req, res) {
     }
 
     con.query('SELECT * FROM DataPoint' + query, values, function(err,rows) {
+        if(err)
+            console.log("Error Selecting : %s ",err );
+        res.json(rows);
+    });
+});
+
+router.post("/flagPoi", function(req, res) {
+    con.query("UPDATE POI SET Flag = true, DateFlagged = CURDATE() WHERE LocationName = ?",
+     [req.body.location], function(err, resp) {
+        if (err) {
+            console.log(err);
+        }
+        res.json(resp);
+     });
+});
+
+router.post("/removeFlag", function(req, res) {
+    con.query("UPDATE POI SET Flag = false, DateFlagged = NULL WHERE LocationName = ?",
+     [req.body.location], function(err, resp) {
+        if (err) {
+            console.log(err);
+        }
+        res.json(resp);
+     });
+});
+
+router.get("/poi", function(req, res) {
+    con.query('SELECT * FROM POI',function(err,rows) {
+        if(err)
+            console.log("Error Selecting : %s ",err );
+        res.json(rows);
+    });
+});
+
+router.get("/data", function(req, res) {
+    con.query('SELECT * FROM DataPoint',function(err,rows) {
         if(err)
             console.log("Error Selecting : %s ",err );
         res.json(rows);

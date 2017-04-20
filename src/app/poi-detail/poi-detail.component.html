@@ -1,5 +1,5 @@
 <div clas="container">
-  <h2>POI Detail for {{ model.location }}</h2>
+  <h2>POI Detail for {{ location }}</h2>
   <form name="form" (ngSubmit)="f.form.valid && submit()" #f="ngForm" novalidate>
     <div class="form-group">
         <label>Data Type</label>
@@ -44,6 +44,8 @@
         <td>{{ point.DateStamp | date: 'medium' }}</td>
       </tr>
     </tbody>
+    <button type="button" *ngIf="!flagged" (click)="flag()" class="btn btn-success">Flag</button>
+    <button type="button" *ngIf="flagged" (click)="removeFlag()" class="btn btn-success">Remove Flag</button>
   </table>
 
 </div>

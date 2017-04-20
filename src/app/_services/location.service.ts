@@ -52,4 +52,15 @@ export class LocationService {
     return this.http.get('api/poiDetail', {search: params}).map((res:Response) => res.json());
   }
 
+  checkFlagged(location:string) {
+    return this.http.get('/api/checkFlagged?location='+ location).map((res:Response) => res.json());
+  }
+
+  setFlag(model) {
+    return this.http.post('api/flagPoi', model, {}).map(res => res.json());
+  }
+
+  removeFlag(location) {
+    return this.http.post('api/removeFlag', location, {}).map(res => res.json());
+  }
 }
