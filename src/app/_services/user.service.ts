@@ -35,7 +35,7 @@ export class UserService {
   }
 
   register(model) {
-    return this.http.post('api/addUser', model, {}).map(res => res.json());
+    return this.http.post('api/addUser', model, {}).map(res => res.text());
 
 
   }

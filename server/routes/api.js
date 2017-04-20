@@ -54,7 +54,7 @@ router.get("/checkCityState", function(req, res) {
 /***************************************************************************** 
                         REGISTRATION ENDPOINTS
 ******************************************************************************/
-router.post("/addUser", function(req, res) {
+router.post("/basicAddUser", function(req, res) {
     var username = req.body.username;
     var password = req.body.password;
     var email = req.body.email;
@@ -80,6 +80,69 @@ router.post("/addCityOfficial", function(req, res) {
      });
 });
 
+router.post("/addUser", function(req, res) {
+    var username = req.body.username;
+    var password = req.body.password;
+    var email = req.body.email;
+    var userType = req.body.userType;
+    // Check if user exists
+    con.query("SELECT * FROM User WHERE Username = ?",
+        username, function(err, response){
+        if (err)
+            return console.log(err);
+        if (!response.length) {
+            // Check if email exists
+            con.query("SELECT * FROM User WHERE Email = ?",
+                email, function(err, resp){
+                if (err)
+                    return console.log(err);
+                if (!resp.length) {
+                    if (userType == "City Official") {
+                        // Check if valid city state combo
+                        con.query("SELECT * FROM CityState WHERE City = ? and State = ?",
+                        [req.body.city, req.body.state], function(err, r3){
+                            if (err)
+                                return console.log("Error " + err);
+                            if (r3.length == 0 || !r3.length)
+                                return res.send("Invalid City, State combo");
+                            else {
+                                con.query("INSERT INTO User VALUES (?, ?, ?, ?)",
+                                [username, email, password, userType], function(err, r) {
+                                    if (err) {
+                                        return console.log("Error " + err);
+                                    }
+                                    // Insert into City Official
+                                    con.query("INSERT INTO CityOfficial VALUES (?, ?, ?, ?, ?)",
+                                    [username, req.body.title, false, req.body.city, req.body.state], function(err, re) {
+                                        if (err) {
+                                            return console.log("Error " + err);
+                                        }
+                                        return res.send("Success");
+                                    });
+                                    
+                                });
+                            }
+                        });                            
+                    } else {
+                        // Insert into User
+                        con.query("INSERT INTO User VALUES (?, ?, ?, ?)",
+                        [username, email, password, userType], function(err, r) {
+                            if (err) {
+                                return console.log("Error " + err);
+                            }
+                            return res.send("Success");
+                        });
+                    }
+                } else {
+                    return res.send("That email is already in use");
+                }
+                
+            });
+        } else {
+            return res.send("That username is already in use");
+        }
+    });
+});
 
 /***************************************************************************** 
                         LOGIN ENDPOINTS

@@ -32,41 +32,16 @@ export class RegisterComponent implements OnInit {
       alert("Passwords do not match");
       return false;
     }
-    if (this.model.userType == "City Official") {
-      this.utilityService.checkCityState(this.model.city, this.model.state).subscribe(data => {
-        if (data.length > 0) {
-          this.registerUser();
-        } else {
-          alert("That is an invalid City State combination");
+    this.userService.register(this.model).subscribe(data => {
+        alert(data);
+        if (data == "Success") {
+          this.router.navigate(["/login"]);
+          this.model = {};
         }
-      });
-    } else {
-      this.registerUser();
-    }
+      }, 
+      err => console.log(err));
     
   }
 
-  registerUser() {
-    this.userService.checkUser(this.model.username).subscribe(data =>
-      {
-        if (data.length == 0) {
-          this.userService.register(this.model).subscribe(
-            data => {
-              this.addCityOfficial(this.model);
-              this.model = {};
-              alert("Success");
-              this.router.navigate(["/login"]);
-            },
-            err => alert("That email already exists")
-          );
-        } else {
-            alert("That username already exists");
-        }
-      });
-  }
-
-  addCityOfficial(model) {
-    this.userService.registerCityOfficial(model).subscribe(err => console.log("There was an error"));
-  }
 
 }
