@@ -19,7 +19,7 @@ con.connect(function(err) {
 });
 
 
-/***************************************************************************** 
+/*****************************************************************************
                         VALIDATION ENDPOINTS
 ******************************************************************************/
 router.get("/checkUser", function(req, res) {
@@ -60,7 +60,7 @@ router.get("/checkFlagged", function(req, res) {
     });
 });
 
-/***************************************************************************** 
+/*****************************************************************************
                         REGISTRATION ENDPOINTS
 ******************************************************************************/
 router.post("/basicAddUser", function(req, res) {
@@ -128,10 +128,10 @@ router.post("/addUser", function(req, res) {
                                         }
                                         return res.send("Success");
                                     });
-                                    
+
                                 });
                             }
-                        });                            
+                        });
                     } else {
                         // Insert into User
                         con.query("INSERT INTO User VALUES (?, ?, ?, ?)",
@@ -145,7 +145,7 @@ router.post("/addUser", function(req, res) {
                 } else {
                     return res.send("That email is already in use");
                 }
-                
+
             });
         } else {
             return res.send("That username is already in use");
@@ -153,7 +153,7 @@ router.post("/addUser", function(req, res) {
     });
 });
 
-/***************************************************************************** 
+/*****************************************************************************
                         LOGIN ENDPOINTS
 ******************************************************************************/
 router.get("/getUser", function(req, res) {
@@ -170,7 +170,7 @@ router.get("/getUser", function(req, res) {
 
 
 
-/***************************************************************************** 
+/*****************************************************************************
                         DROPDOWN MENU ENDPOINTS
 ******************************************************************************/
 router.get("/cityList", function(req, res) {
@@ -205,7 +205,7 @@ router.get("/typeList", function(req, res) {
     });
 });
 
-/***************************************************************************** 
+/*****************************************************************************
                         CITY SCIENTIST ENDPOINTS
 ******************************************************************************/
 
@@ -234,7 +234,7 @@ router.post("/addPOILocation", function(req, res) {
      });
 });
 
-/***************************************************************************** 
+/*****************************************************************************
                         ADMIN ENDPOINTS
 ******************************************************************************/
 router.get("/pendingAccounts", function(req, res) {
@@ -293,7 +293,7 @@ router.post("/rejectDataPoint", function(req, res) {
      });
 });
 
-/***************************************************************************** 
+/*****************************************************************************
                         CITY OFFICIAL ENDPOINTS
 ******************************************************************************/
 router.get("/filterPOIs", function(req, res) {
@@ -390,6 +390,10 @@ router.get("/poi", function(req, res) {
             console.log("Error Selecting : %s ",err );
         res.json(rows);
     });
+});
+
+router.get("/poiReport", function(req, res) {
+    //TODO con.query('SELECT * FROM ') FINISH THIS QUERY
 });
 
 router.get("/data", function(req, res) {
