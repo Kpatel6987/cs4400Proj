@@ -14,6 +14,7 @@ export class RegisterComponent implements OnInit {
   cities;
   states;
   types = ['City Official', 'City Scientist'];
+  emailPattern = "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$";
   
   constructor(
     private route: ActivatedRoute,
