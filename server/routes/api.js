@@ -384,20 +384,5 @@ router.post("/removeFlag", function(req, res) {
      });
 });
 
-router.get("/poi", function(req, res) {
-    con.query('SELECT * FROM POI',function(err,rows) {
-        if(err)
-            console.log("Error Selecting : %s ",err );
-        res.json(rows);
-    });
-});
-
-router.get("/data", function(req, res) {
-    con.query('SELECT * FROM DataPoint',function(err,rows) {
-        if(err)
-            console.log("Error Selecting : %s ",err );
-        res.json(rows);
-    });
-});
 
 module.exports = router;
