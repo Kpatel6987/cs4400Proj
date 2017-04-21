@@ -27,7 +27,7 @@ export class PendingDataPointsComponent implements OnInit {
     console.log(point.DateTime);
     this.dataService.acceptPoint(point).subscribe(data => {
       console.log(data)
-      this.router.navigate["/home"];
+      this.router.navigate(["/home"]);
     });
   }
 
@@ -35,7 +35,7 @@ export class PendingDataPointsComponent implements OnInit {
     this.dataService.rejectPoint(point).subscribe(data => {
       console.log(data);
       alert("Success");
-      this.router.navigate["/home"];
+      this.router.navigate(["/home"]);
     });
   }
 
