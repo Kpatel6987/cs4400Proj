@@ -4,14 +4,14 @@
   <table class="table">
     <thead>
       <tr>
-        <th (click)="changeSorting('LocationName')">POI Location <span [class]="selectedClass('LocationName')"></span></th>
-        <th (click)="changeSorting('Type')">Data Type <span [class]="selectedClass('Type')"></span></th>
-        <th (click)="changeSorting('DataValue')">Data Value <span [class]="selectedClass('DataValue')"></span></th>
-        <th (click)="changeSorting('DateStamp')">Date and Time of Reading <span [class]="selectedClass('DateStamp')"></span></th>
+        <th (click)="changeSorting('LocationName')">POI Location <span [class]="selectedColumn('LocationName')"></span></th>
+        <th (click)="changeSorting('Type')">Data Type <span [class]="selectedColumn('Type')"></span></th>
+        <th (click)="changeSorting('DataValue')">Data Value <span [class]="selectedColumn('DataValue')"></span></th>
+        <th (click)="changeSorting('DateStamp')">Date and Time of Reading <span [class]="selectedColumn('DateStamp')"></span></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let point of pointsArray | orderBy : sorting()">
+      <tr *ngFor="let point of points | async">
         <td>{{ point.LocationName }}</td>
         <td>{{ point.Type }}</td>
         <td>{{ point.DataValue }}</td>

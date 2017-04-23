@@ -6,18 +6,18 @@
         <th>POI Location</th>
         <th>City</th>
         <th>State</th>
-        <th (click)="changeSorting('MoldMin')">Mold Min <span [class]="selectedClass('MoldMin')"></span></th>
-        <th (click)="changeSorting('MoldAvg')">Mold Avg <span [class]="selectedClass('MoldAvg')"></span></th>
-        <th (click)="changeSorting('MoldMax')">Mold Max <span [class]="selectedClass('MoldMax')"></span></th>
-        <th (click)="changeSorting('AQMin')">AQ Min <span [class]="selectedClass('AQMin')"></span></th>
-        <th (click)="changeSorting('AQAvg')">AQ Avg <span [class]="selectedClass('AQAvg')"></span></th>
-        <th (click)="changeSorting('AQMax')">AQ Max <span [class]="selectedClass('AQMax')"></span></th>
-        <th (click)="changeSorting('numPoints')"># of Data Points <span [class]="selectedClass('numPoints')"></span></th>
-        <th (click)="changeSorting('Flag')">Flagged <span [class]="selectedClass('Flag')"></span></th>
+        <th (click)="changeSorting('MoldMin')">Mold Min <span [class]="selectedColumn('MoldMin')"></span></th>
+        <th (click)="changeSorting('MoldAvg')">Mold Avg <span [class]="selectedColumn('MoldAvg')"></span></th>
+        <th (click)="changeSorting('MoldMax')">Mold Max <span [class]="selectedColumn('MoldMax')"></span></th>
+        <th (click)="changeSorting('AQMin')">AQ Min <span [class]="selectedColumn('AQMin')"></span></th>
+        <th (click)="changeSorting('AQAvg')">AQ Avg <span [class]="selectedColumn('AQAvg')"></span></th>
+        <th (click)="changeSorting('AQMax')">AQ Max <span [class]="selectedColumn('AQMax')"></span></th>
+        <th (click)="changeSorting('numPoints')"># of Data Points <span [class]="selectedColumn('numPoints')"></span></th>
+        <th (click)="changeSorting('Flag')">Flagged <span [class]="selectedColumn('Flag')"></span></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let poi of poiArray | orderBy : sorting()">
+      <tr *ngFor="let poi of pois | async">
         <td>{{ poi.locationName }}</td>
         <td>{{ poi.City }}</td>
         <td>{{ poi.State }}</td>

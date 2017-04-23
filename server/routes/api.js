@@ -266,7 +266,9 @@ router.post("/rejectAccount", function(req, res) {
 });
 
 router.get("/pendingDataPoints", function(req, res) {
-    con.query('SELECT DateStamp, DataValue, LocationName, Type FROM DataPoint WHERE Accepted = false',function(err,rows) {
+    var query = "SELECT DateStamp, DataValue, LocationName, Type FROM DataPoint WHERE Accepted = false ORDER BY "
+      + req.query.column + " " + req.query.ascending;
+    con.query(query, function(err,rows) {
         if(err)
             console.log("Error Selecting : %s ",err );
         res.json(rows);
@@ -385,14 +387,16 @@ router.post("/removeFlag", function(req, res) {
 });
 
 router.get("/poiReport", function(req, res) {
-    con.query("SELECT * FROM (SELECT locationName, "
- + "MIN(DataValue) as AQMin, AVG(DataValue) as AQAvg, MAX(DataValue) as AQMax "
- + "FROM DataPoint WHERE Type LIKE 'Air Quality' AND Accepted = 1 GROUP BY locationName) AS a "
- + "NATURAL JOIN (SELECT locationName, MIN(DataValue) as MoldMin, AVG(DataValue) as MoldAvg, MAX(DataValue) as MoldMax "
- + "FROM DataPoint WHERE Type LIKE 'MOLD' AND Accepted = 1 GROUP BY locationName) AS b "
- + "NATURAL JOIN (SELECT locationName, COUNT(*) as numPoints "
- + "FROM DataPoint WHERE Accepted = 1 GROUP BY locationName) AS c "
- + "NATURAL JOIN (SELECT locationName, City, State, Flag FROM POI) as d;" , function(err, resp) {
+    var query = "SELECT * FROM (SELECT locationName, "
+      + "MIN(DataValue) as AQMin, AVG(DataValue) as AQAvg, MAX(DataValue) as AQMax "
+      + "FROM DataPoint WHERE Type LIKE 'Air Quality' AND Accepted = 1 GROUP BY locationName) AS a "
+      + "NATURAL JOIN (SELECT locationName, MIN(DataValue) as MoldMin, AVG(DataValue) as MoldAvg, MAX(DataValue) as MoldMax "
+      + "FROM DataPoint WHERE Type LIKE 'MOLD' AND Accepted = 1 GROUP BY locationName) AS b "
+      + "NATURAL JOIN (SELECT locationName, COUNT(*) as numPoints "
+      + "FROM DataPoint WHERE Accepted = 1 GROUP BY locationName) AS c "
+      + "NATURAL JOIN (SELECT locationName, City, State, Flag FROM POI) as d ORDER BY "
+      + req.query.column + " " + req.query.ascending;
+    con.query(query, function(err, resp) {
         if (err) {
             console.log(err);
         }

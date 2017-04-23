@@ -62,8 +62,11 @@ export class LocationService {
     return this.http.get('/api/checkFlagged?location='+ location).map((res:Response) => res.json());
   }
 
-  poiReport() {
-    return this.http.get('/api/poiReport').flatMap((res:Response) => res.json());
+  poiReport(column, asc) {
+    let params = new URLSearchParams();
+    params.set('column', column)
+    params.set('ascending', asc ? 'ASC' : 'DESC')
+    return this.http.get('/api/poiReport', { search: params }).map((res:Response) => res.json());
   }
 
   setFlag(model) {

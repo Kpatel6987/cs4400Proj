@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/mergeMap'
 import { Router, ActivatedRoute } from '@angular/router';
-import { Http, Response } from '@angular/http';
+import { Http, Response, URLSearchParams } from '@angular/http';
 
 
 @Injectable()
@@ -19,8 +18,11 @@ export class DataService {
       return this.http.post('api/addDataPoint', model, {}).map(res => res.json());
   }
 
-  getPendingPoints() {
-    return this.http.get('/api/pendingDataPoints').flatMap((res:Response) => res.json());
+  getPendingPoints(column, asc) {
+    let params = new URLSearchParams();
+    params.set('column', column)
+    params.set('ascending', asc ? 'ASC' : 'DESC')
+    return this.http.get('/api/pendingDataPoints', { search: params }).map((res:Response) => res.json());
   }
 
   acceptPoint(point) {

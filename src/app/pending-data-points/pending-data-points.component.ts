@@ -1,13 +1,7 @@
-/*
- * Credit for sorting functionality:
- * Cory Shaw, fueltravel.com
- */
-
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DataService } from '../_services/data.service';
 import { DatePipe } from '@angular/common';
-import { OrderBy } from '../_pipes/orderBy'
 
 @Component({
   selector: 'app-pending-data-points',
@@ -24,14 +18,12 @@ export class PendingDataPointsComponent implements OnInit {
     private router: Router,
     private dataService: DataService,
     private datePipe: DatePipe,
-    private orderByPipe : OrderBy
   ) { }
 
   ngOnInit() {
-    this.pointsArray = [];
-    this.points = this.dataService.getPendingPoints().subscribe((data) => this.pointsArray.push(data));
     this.sortColumn = "DateStamp";
     this.ascending = true;
+    this.points = this.dataService.getPendingPoints(this.sortColumn, this.ascending);
     console.log(this.pointsArray);
   }
 
@@ -42,9 +34,10 @@ export class PendingDataPointsComponent implements OnInit {
           this.sortColumn = column;
           this.ascending = true;
       }
+      this.points = this.dataService.getPendingPoints(this.sortColumn, this.ascending);
   }
 
-  selectedClass(columnName): string{
+  selectedColumn(columnName): string{
     if (this.sortColumn == columnName) {
         return this.ascending ? "glyphicon glyphicon-triangle-bottom" : "glyphicon glyphicon-triangle-top";
     } else {
@@ -52,23 +45,17 @@ export class PendingDataPointsComponent implements OnInit {
     }
   }
 
-  sorting() :string {
-      return this.ascending ? this.sortColumn : '-' + this.sortColumn;
-  }
-
   accept(point) {
     point.DateTime = this.datePipe.transform(point.DateStamp, 'yyyy-MM-dd HH:mm:ss');
-    this.pointsArray = [];
     this.dataService.acceptPoint(point).subscribe(data => {
-      this.points = this.dataService.getPendingPoints().subscribe((data) => this.pointsArray.push(data));
+      this.points = this.dataService.getPendingPoints(this.sortColumn, this.ascending);
     });
   }
 
   reject(point) {
     point.DateTime = this.datePipe.transform(point.DateStamp, 'yyyy-MM-dd HH:mm:ss');
-    this.pointsArray = [];
     this.dataService.rejectPoint(point).subscribe(data => {
-      this.points = this.dataService.getPendingPoints().subscribe((data) => this.pointsArray.push(data));
+      this.points = this.dataService.getPendingPoints(this.sortColumn, this.ascending);
     });
   }
 
