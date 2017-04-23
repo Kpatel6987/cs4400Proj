@@ -309,9 +309,9 @@ router.get("/filterPOIs", function(req, res) {
         if (req.query.hasOwnProperty(propName)) {
             values.push(req.query[propName]);
             if (propName == 'dateFrom') {
-                query = query + "DateStamp >= ?";
+                query = query + "DateFlagged >= ?";
             } else if (propName == 'dateTo') {
-                query = query + "DateStamp <= ?";
+                query = query + "DateFlagged <= ?";
             } else {
                 query = query + propName + " = ?";
             }
@@ -332,7 +332,7 @@ router.get("/poiDetail", function(req, res) {
     var and = "";
     var query = "";
     if (Object.keys(req.query).length > 0)
-        query = " WHERE ";
+        query = " AND ";
     if (Object.keys(req.query).length > 1)
         and = " AND ";
     var values = [];
@@ -357,7 +357,7 @@ router.get("/poiDetail", function(req, res) {
             query = query + and;
     }
 
-    con.query('SELECT * FROM DataPoint' + query, values, function(err,rows) {
+    con.query('SELECT * FROM DataPoint WHERE ACCEPTED = true' + query, values, function(err,rows) {
         if(err)
             console.log("Error Selecting : %s ",err );
         res.json(rows);

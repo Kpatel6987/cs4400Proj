@@ -8,14 +8,14 @@
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted }">
         <label>City</label>
         <select for="city" name="city" [(ngModel)]="model.city" required>
-            <option *ngFor="let city of cities | async" [ngValue]="city">{{city.City}}</option>
+            <option *ngFor="let city of cities | async" [ngValue]="city.City">{{city.City}}</option>
         </select>
         <div *ngIf="f.submitted && !city == ''" class="help-block">City is required</div>
     </div>
     <div class="form-group" [ngClass]="{ 'has-error': f.submitted }">
         <label>State</label>
         <select for="state" name="state" [(ngModel)]="model.state" required>
-            <option *ngFor="let s of states | async" [ngValue]="s">{{s.State}}</option>
+            <option *ngFor="let s of states | async" [ngValue]="s.State">{{s.State}}</option>
         </select>
         <div *ngIf="f.submitted && !state == ''" class="help-block">State is required</div>
     </div>

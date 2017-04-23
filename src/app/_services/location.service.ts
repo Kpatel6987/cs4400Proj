@@ -26,8 +26,13 @@ export class LocationService {
       params.set('City', model.city);
     if (model.zipcode != null)
       params.set('ZipCode', model.zipcode);
-    if (model.flagged != null)
-      params.set('Flag', model.flagged);
+    if (model.flagged != null) {
+      if (model.flagged == true)
+        params.set('Flag', '1');
+      else
+        params.set('Flag', '0')
+
+    }
     if (model.dateFrom != null)
       params.set('dateFrom', model.dateFrom);
     if (model.dateTo != null)
