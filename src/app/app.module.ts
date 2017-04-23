@@ -23,7 +23,7 @@ import { UtilityService } from './_services/utility.service';
 import { DataService } from './_services/data.service';
 import { LocationService } from './_services/location.service';
 import { PoiListComponent } from './poi-list/poi-list.component';
-import { OrderBy } from './orderBy';
+import { OrderBy } from './_pipes/orderBy';
 
 @NgModule({
   declarations: [

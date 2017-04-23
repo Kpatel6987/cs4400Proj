@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DataService } from '../_services/data.service';
 import { DatePipe } from '@angular/common';
-import { OrderBy } from '../orderBy'
+import { OrderBy } from '../_pipes/orderBy'
 
 @Component({
   selector: 'app-pending-data-points',
