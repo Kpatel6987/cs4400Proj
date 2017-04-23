@@ -5,8 +5,7 @@ import { OrderBy } from '../_pipes/orderBy';
 
 @Component({
   selector: 'app-poi-report',
-  templateUrl: './poi-report.component.html',
-  styleUrls: ['./poi-report.component.css']
+  templateUrl: './poi-report.component.html'
 })
 export class PoiReportComponent implements OnInit {
   pois;

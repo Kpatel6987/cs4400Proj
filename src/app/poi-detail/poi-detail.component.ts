@@ -6,8 +6,7 @@ import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-poi-detail',
-  templateUrl: './poi-detail.component.html',
-  styleUrls: ['./poi-detail.component.css']
+  templateUrl: './poi-detail.component.html'
 })
 export class PoiDetailComponent implements OnInit {
 

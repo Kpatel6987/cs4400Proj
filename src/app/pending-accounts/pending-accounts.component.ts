@@ -4,8 +4,7 @@ import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'app-pending-accounts',
-  templateUrl: './pending-accounts.component.html',
-  styleUrls: ['./pending-accounts.component.css']
+  templateUrl: './pending-accounts.component.html'
 })
 export class PendingAccountsComponent implements OnInit {
 
