@@ -357,7 +357,7 @@ router.get("/poiDetail", function(req, res) {
             query = query + and;
     }
 
-    con.query('SELECT DateStamp, DataValue, Type FROM DataPoint WHERE ACCEPTED = true' + query, values, function(err,rows) {
+    con.query('SELECT DateStamp, DataValue, Type FROM DataPoint WHERE ACCEPTED = true' + query + " ORDER BY DateStamp", values, function(err,rows) {
         if(err)
             console.log("Error Selecting : %s ",err );
         res.json(rows);
