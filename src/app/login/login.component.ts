@@ -31,24 +31,25 @@ export class LoginComponent implements OnInit {
                     if (data[0].UserType == "City Official") {
                         this.userService.checkCityOfficial(data[0].Username).subscribe(d => {
                             if (d[0].Approved == null) {
-                                alert("Account has been rejected");
+                                alert("Account has been rejected by the admin and will not be allowed to login");
                             } else {
-                                this.userService.showNavBar(true);
-                                this.router.navigate(["/home"]);
-                                localStorage.setItem('user', data[0].Username);
-                                localStorage.setItem('type', data[0].UserType);
-                                if (d[0].Approved == false)
-                                    localStorage.setItem('approved', 'false');
-                                else 
-                                    localStorage.setItem('approved', 'true');
+                                if (d[0].Approved == false) {
+                                    alert("Account is still pending. Try again later");
+                                }
+                                else {
+                                    localStorage.setItem('user', data[0].Username);
+                                    localStorage.setItem('type', data[0].UserType);
+                                    this.router.navigate(["/home"]);
+                                    this.userService.showNavBar(true);
+                                }
                             }
-                        })
+                        });
                     } else {
-                        this.userService.showNavBar(true);
-                        this.router.navigate(["/home"]);
                         localStorage.setItem('user', data[0].Username);
                         localStorage.setItem('type', data[0].UserType);
-                    }
+                        this.router.navigate(["/home"]);
+                        this.userService.showNavBar(true);
+                    }        
                 }
                
             });

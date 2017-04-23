@@ -23,7 +23,6 @@ export class UserService {
   logout() {
     localStorage.removeItem('user');
     localStorage.removeItem('type');
-    localStorage.removeItem('approved');
   }
 
   isAuthenticated() {

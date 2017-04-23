@@ -359,7 +359,7 @@ router.get("/poiDetail", function(req, res) {
             query = query + and;
     }
 
-    con.query('SELECT DateStamp, DataValue, Type FROM DataPoint WHERE ACCEPTED = true' + query, values, function(err,rows) {
+    con.query('SELECT DateStamp, DataValue, Type FROM DataPoint WHERE ACCEPTED = true' + query + " ORDER BY DateStamp", values, function(err,rows) {
         if(err)
             console.log("Error Selecting : %s ",err );
         res.json(rows);
@@ -397,6 +397,23 @@ router.get("/poiReport", function(req, res) {
       + "NATURAL JOIN (SELECT locationName, City, State, Flag FROM POI) as d ORDER BY "
       + req.query.column + " " + req.query.ascending;
     con.query(query, function(err, resp) {
+        if (err) {
+            console.log(err);
+        }
+        res.json(resp);
+     });
+});
+
+router.get("/orderPoiReport", function(req, res) {
+    con.query("SELECT * FROM (SELECT locationName, "
+ + "MIN(DataValue) as AQMin, AVG(DataValue) as AQAvg, MAX(DataValue) as AQMax "
+ + "FROM DataPoint WHERE Type LIKE 'Air Quality' AND Accepted = 1 GROUP BY locationName) AS a "
+ + "NATURAL JOIN (SELECT locationName, MIN(DataValue) as MoldMin, AVG(DataValue) as MoldAvg, MAX(DataValue) as MoldMax "
+ + "FROM DataPoint WHERE Type LIKE 'MOLD' AND Accepted = 1 GROUP BY locationName) AS b "
+ + "NATURAL JOIN (SELECT locationName, COUNT(*) as numPoints "
+ + "FROM DataPoint WHERE Accepted = 1 GROUP BY locationName) AS c "
+ + "NATURAL JOIN (SELECT locationName, City, State, Flag FROM POI) as d ORDER BY " 
+ + req.query.Column + " " + req.query.Order + ";" , function(err, resp) {
         if (err) {
             console.log(err);
         }
