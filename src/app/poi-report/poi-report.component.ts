@@ -9,12 +9,42 @@ import { OrderBy } from '../_pipes/orderBy';
 })
 export class PoiReportComponent implements OnInit {
   pois;
+  poiArray;
+  sortColumn: string;
+  ascending: boolean;
   constructor(
-    private locationService: LocationService
+    private locationService: LocationService,
+    private datePipe: DatePipe,
+    private orderByPipe: OrderBy
   ) { }
 
   ngOnInit() {
-    this.pois = this.locationService.poiReport();
+    this.poiArray = [];
+    this.pois = this.locationService.poiReport().subscribe((data) => this.poiArray.push(data));
   }
 
+  changeSorting(column) {
+      if (column === this.sortColumn) {
+          this.ascending = !this.ascending;
+      } else {
+          this.sortColumn = column;
+          this.ascending = true;
+      }
+  }
+
+  selectedClass(columnName): string{
+    if (this.sortColumn == columnName) {
+        return this.ascending ? "glyphicon glyphicon-triangle-bottom" : "glyphicon glyphicon-triangle-top";
+    } else {
+        return "glyphicon glyphicon-sort";
+    }
+  }
+
+  sorting() :string {
+      return this.ascending ? this.sortColumn : '-' + this.sortColumn;
+  }
+
+  isFlagged(poi) :string{
+      return poi.Flag ? "glyphicon glyphicon-flag" : "";
+  }
 }

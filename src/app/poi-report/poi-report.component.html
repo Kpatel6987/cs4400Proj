@@ -1,34 +1,39 @@
 <div class="container">
+  <h2>POI Report</h2>
   <table class="table">
     <thead>
       <tr>
         <th>POI Location</th>
         <th>City</th>
         <th>State</th>
-        <th>Mold Min</th>
-        <th>Mold Avg</th>
-        <th>Mold Max</th>
-        <th>AQ Min</th>
-        <th>AQ Avg</th>
-        <th>AQ Max</th>
-        <th># of Data Points</th>
-        <th>Flagged</th>
+        <th (click)="changeSorting('MoldMin')">Mold Min <span [class]="selectedClass('MoldMin')"></span></th>
+        <th (click)="changeSorting('MoldAvg')">Mold Avg <span [class]="selectedClass('MoldAvg')"></span></th>
+        <th (click)="changeSorting('MoldMax')">Mold Max <span [class]="selectedClass('MoldMax')"></span></th>
+        <th (click)="changeSorting('AQMin')">AQ Min <span [class]="selectedClass('AQMin')"></span></th>
+        <th (click)="changeSorting('AQAvg')">AQ Avg <span [class]="selectedClass('AQAvg')"></span></th>
+        <th (click)="changeSorting('AQMax')">AQ Max <span [class]="selectedClass('AQMax')"></span></th>
+        <th (click)="changeSorting('numPoints')"># of Data Points <span [class]="selectedClass('numPoints')"></span></th>
+        <th (click)="changeSorting('Flag')">Flagged <span [class]="selectedClass('Flag')"></span></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let poi of pois | async">
-        <td>{{ poi.LocationName }}</td>
-        <td>{{ poi.Type }}</td>
-        <td>{{ poi.DataValue }}</td>
-        <td>{{ poi.LocationName }}</td>
-        <td>{{ poi.Type }}</td>
-        <td>{{ poi.DataValue }}</td>
-        <td>{{ poi.LocationName }}</td>
-        <td>{{ poi.Type }}</td>
-        <td>{{ poi.DataValue }}</td>
-        <td>{{ poi.Type }}</td>
-        <td>{{ poi.DataValue }}</td>
+      <tr *ngFor="let poi of poiArray | orderBy : sorting()">
+        <td>{{ poi.locationName }}</td>
+        <td>{{ poi.City }}</td>
+        <td>{{ poi.State }}</td>
+        <td>{{ poi.MoldMin }}</td>
+        <td>{{ poi.MoldAvg }}</td>
+        <td>{{ poi.MoldMax }}</td>
+        <td>{{ poi.AQMin }}</td>
+        <td>{{ poi.AQAvg }}</td>
+        <td>{{ poi.AQMax }}</td>
+        <td>{{ poi.numPoints }}</td>
+        <td>
+            <span [class]="isFlagged(poi)"></span>
+        </td>
       </tr>
     </tbody>
   </table>
+
+  <button [routerLink]="['/home']" class="btn btn-danger">Back</button>
 </div>
