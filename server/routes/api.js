@@ -392,7 +392,7 @@ router.get("/poiReport", function(req, res) {
  + "FROM DataPoint WHERE Type LIKE 'MOLD' AND Accepted = 1 GROUP BY locationName) AS b "
  + "NATURAL JOIN (SELECT locationName, COUNT(*) as numPoints "
  + "FROM DataPoint WHERE Accepted = 1 GROUP BY locationName) AS c "
- + "NATURAL JOIN (SELECT locationName, Flag FROM POI) as d;" , function(err, resp) {
+ + "NATURAL JOIN (SELECT locationName, City, State, Flag FROM POI) as d;" , function(err, resp) {
         if (err) {
             console.log(err);
         }
