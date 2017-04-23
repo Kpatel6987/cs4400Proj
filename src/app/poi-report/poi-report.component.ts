@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LocationService } from '../_services/location.service';
+import { DatePipe } from '@angular/common';
+import { OrderBy } from '../_pipes/orderBy';
 
 @Component({
   selector: 'app-poi-report',
