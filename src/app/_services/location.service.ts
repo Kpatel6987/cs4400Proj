@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/mergeMap';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Http, Response, URLSearchParams, QueryEncoder } from '@angular/http';
 
@@ -62,7 +63,7 @@ export class LocationService {
   }
 
   poiReport() {
-    return this.http.get('/api/poiReport').map((res:Response) => res.json());
+    return this.http.get('/api/poiReport').flatMap((res:Response) => res.json());
   }
 
   setFlag(model) {
