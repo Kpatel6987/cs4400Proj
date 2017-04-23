@@ -13,9 +13,9 @@
           <ul class="nav navbar-nav navbar-right">
             <li><a *ngIf="this.userType == 'City Scientist'" [routerLink]="['/datapoint']">Add Data Point</a></li>
             <li><a *ngIf="this.userType == 'City Scientist'" [routerLink]="['/poilocation']">Add Location</a></li>
-            <li><a *ngIf="this.userType == 'City Official' && accepted" [routerLink]="['/viewpois']">Filter/Search POI</a></li>
-            <li><a *ngIf="this.userType == 'City Official' && accepted" [routerLink]="['/poilist']">POI List</a></li>
-            <li><a *ngIf="this.userType == 'City Official' && accepted" [routerLink]="['/poireport']">POI Report</a></li>
+            <li><a *ngIf="this.userType == 'City Official'" [routerLink]="['/viewpois']">Filter/Search POI</a></li>
+            <li><a *ngIf="this.userType == 'City Official'" [routerLink]="['/poilist']">POI List</a></li>
+            <li><a *ngIf="this.userType == 'City Official'" [routerLink]="['/poireport']">POI Report</a></li>
             <li><a *ngIf="this.userType == 'Administrator'" [routerLink]="['/pendingdatapoints']">Pending Data Points</a></li>
             <li><a *ngIf="this.userType == 'Administrator'" [routerLink]="['/pendingaccounts']">Pending Accounts</a></li>
             <li><a (click)="logout()">Logout</a></li>

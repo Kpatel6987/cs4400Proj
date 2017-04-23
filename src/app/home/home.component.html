@@ -5,8 +5,7 @@
   <button *ngIf="this.userType == 'Administrator'" [routerLink]="['/pendingdatapoints']" class="btn btn-primary">Pending Data Points</button>
   <button *ngIf="this.userType == 'Administrator'" [routerLink]="['/pendingaccounts']" class="btn btn-primary">Pending City Official Accounts</button>
 
-  <button *ngIf="this.userType == 'City Official' && accepted" [routerLink]="['/viewpois']" class="btn btn-primary">Filter/Search POI</button>
-  <button *ngIf="this.userType == 'City Official' && accepted" [routerLink]="['/poilist']" class="btn btn-primary">POI Detail</button>
-  <button *ngIf="this.userType == 'City Official' && accepted" [routerLink]="['/poireport']" class="btn btn-primary">POI Report</button>
-  <p *ngIf="this.userType == 'City Official' && !accepted">Your account hasn't been approved</p>
+  <button *ngIf="this.userType == 'City Official'" [routerLink]="['/viewpois']" class="btn btn-primary">Filter/Search POI</button>
+  <button *ngIf="this.userType == 'City Official'" [routerLink]="['/poilist']" class="btn btn-primary">POI Detail</button>
+  <button *ngIf="this.userType == 'City Official'" [routerLink]="['/poireport']" class="btn btn-primary">POI Report</button>
 </div>
