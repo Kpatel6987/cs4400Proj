@@ -4,8 +4,7 @@ import { UserService } from '../_services/user.service';
 
 @Component({
   selector: 'navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  templateUrl: './navbar.component.html'
 })
 export class NavbarComponent {
 

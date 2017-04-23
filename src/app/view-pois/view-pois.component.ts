@@ -6,8 +6,7 @@ import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-view-pois',
-  templateUrl: './view-pois.component.html',
-  styleUrls: ['./view-pois.component.css']
+  templateUrl: './view-pois.component.html'
 })
 export class ViewPoisComponent implements OnInit {
 
