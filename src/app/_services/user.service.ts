@@ -23,7 +23,7 @@ export class UserService {
   logout() {
     localStorage.removeItem('user');
     localStorage.removeItem('type');
-    localStorage.removeItem('accepted');
+    localStorage.removeItem('approved');
   }
 
   isAuthenticated() {
@@ -43,12 +43,10 @@ export class UserService {
   }
 
   checkUser(username) {
-    //console.log(username);
     return this.http.get('/api/checkUser?username='+username).map((res:Response) => res.json());
   }
 
   checkCityOfficial(username) {
-    //console.log(username);
     return this.http.get('/api/checkCityOfficial?username='+username).map((res:Response) => res.json());
   }
 
