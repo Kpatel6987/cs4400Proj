@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from "rxjs/BehaviorSubject";
 import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/mergeMap'
 import { Router, ActivatedRoute } from '@angular/router';
 import { Http, Response } from '@angular/http';
 
@@ -19,7 +20,7 @@ export class DataService {
   }
 
   getPendingPoints() {
-    return this.http.get('/api/pendingDataPoints').map((res:Response) => res.json());
+    return this.http.get('/api/pendingDataPoints').flatMap((res:Response) => res.json());
   }
 
   acceptPoint(point) {
@@ -28,5 +29,5 @@ export class DataService {
 
   rejectPoint(point) {
     return this.http.post('api/rejectDataPoint', point, {}).map(res => res.json());
-  }  
+  }
 }

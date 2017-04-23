@@ -23,6 +23,7 @@ import { UtilityService } from './_services/utility.service';
 import { DataService } from './_services/data.service';
 import { LocationService } from './_services/location.service';
 import { PoiListComponent } from './poi-list/poi-list.component';
+import { OrderBy } from './orderBy';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import { PoiListComponent } from './poi-list/poi-list.component';
     ViewPoisComponent,
     PoiDetailComponent,
     PoiReportComponent,
-    PoiListComponent
+    PoiListComponent,
+    OrderBy
   ],
   imports: [
     BrowserModule,
@@ -53,7 +55,8 @@ import { PoiListComponent } from './poi-list/poi-list.component';
     DataService,
     LocationService,
     DatePipe,
-    BaseRequestOptions
+    BaseRequestOptions,
+    OrderBy
   ],
   bootstrap: [AppComponent]
 })
