@@ -15,7 +15,7 @@ export class ViewPoisComponent implements OnInit {
   locations;
   pois;
   displayTable = false;
-  
+
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -32,6 +32,10 @@ export class ViewPoisComponent implements OnInit {
   submit() {
     this.pois = this.locationService.filterPOIs(this.model);
     this.displayTable = true;
+  }
+
+  isFlagged(poi) :string{
+    return poi.Flag ? "glyphicon glyphicon-flag" : "";
   }
 
   clear() {

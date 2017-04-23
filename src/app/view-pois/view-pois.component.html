@@ -53,7 +53,7 @@
         <td>{{ poi.City }}</td>
         <td>{{ poi.State }}</td>
         <td>{{ poi.ZipCode }}</td>
-        <td>{{ poi.Flag }}</td>
+        <td><span [class]="isFlagged(poi)"></span></td>
         <td>{{ poi.DateFlagged | date: 'MM/dd/yyyy' }}</td>
         <td><a [routerLink]="['/poidetail', poi.LocationName]">View Details</a></td>
       </tr>
