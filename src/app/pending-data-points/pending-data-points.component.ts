@@ -24,18 +24,15 @@ export class PendingDataPointsComponent implements OnInit {
 
   accept(point) {
     point.DateTime = this.datePipe.transform(point.DateStamp, 'yyyy-MM-dd HH:mm:ss');
-    console.log(point.DateTime);
     this.dataService.acceptPoint(point).subscribe(data => {
-      console.log(data)
-      this.router.navigate(["/home"]);
+      this.points = this.dataService.getPendingPoints();
     });
   }
 
   reject(point) {
+    point.DateTime = this.datePipe.transform(point.DateStamp, 'yyyy-MM-dd HH:mm:ss');
     this.dataService.rejectPoint(point).subscribe(data => {
-      console.log(data);
-      alert("Success");
-      this.router.navigate(["/home"]);
+      this.points = this.dataService.getPendingPoints();
     });
   }
 

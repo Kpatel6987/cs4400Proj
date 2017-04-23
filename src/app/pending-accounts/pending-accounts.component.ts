@@ -23,18 +23,14 @@ export class PendingAccountsComponent implements OnInit {
 
   accept(account) {
     this.userService.acceptAccount(account).subscribe(data => {
-      console.log(data);
-      alert("Success");
-      this.router.navigate(['/home']);
+      this.accounts = this.userService.getPendingAccounts();
     }); 
       
   }
 
   reject(account) {
     this.userService.rejectAccount(account).subscribe(data => {
-      console.log(data);
-      alert("Success");
-      this.router.navigate(['/home']);
+      this.accounts = this.userService.getPendingAccounts();
     }); 
   }
 }

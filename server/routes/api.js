@@ -24,7 +24,7 @@ con.connect(function(err) {
 ******************************************************************************/
 router.get("/checkUser", function(req, res) {
     var username = req.query.username;
-    con.query("SELECT * FROM User WHERE Username = ?",
+    con.query("SELECT Username FROM User WHERE Username = ?",
         username, function(err, response){
         if (err)
             res.json(err);
@@ -34,7 +34,7 @@ router.get("/checkUser", function(req, res) {
 
 router.get("/checkCityOfficial", function(req, res) {
     var CityOfficialname = req.query.username;
-    con.query("SELECT * FROM CityOfficial WHERE Username = ?",
+    con.query("SELECT Username, Approved FROM CityOfficial WHERE Username = ?",
         CityOfficialname, function(err, response){
         if (err)
             res.json(err);
@@ -52,7 +52,7 @@ router.get("/checkCityState", function(req, res) {
 });
 
 router.get("/checkFlagged", function(req, res) {
-    con.query("SELECT * FROM POI WHERE LocationName = ?",
+    con.query("SELECT Flag FROM POI WHERE LocationName = ?",
         [req.query.location], function(err, response){
         if (err)
             res.json(err);
@@ -95,13 +95,13 @@ router.post("/addUser", function(req, res) {
     var email = req.body.email;
     var userType = req.body.userType;
     // Check if user exists
-    con.query("SELECT * FROM User WHERE Username = ?",
+    con.query("SELECT Username FROM User WHERE Username = ?",
         username, function(err, response){
         if (err)
             return console.log(err);
         if (!response.length) {
             // Check if email exists
-            con.query("SELECT * FROM User WHERE Email = ?",
+            con.query("SELECT Email FROM User WHERE Email = ?",
                 email, function(err, resp){
                 if (err)
                     return console.log(err);
@@ -160,7 +160,7 @@ router.get("/getUser", function(req, res) {
     var username = req.query.username;
     var password = req.query.password;
     var obj = { status: false};
-    con.query("SELECT * FROM User WHERE Username = ? and Password = ?",
+    con.query("SELECT Username, UserType FROM User WHERE Username = ? and Password = ?",
         [username, password], function(err, response){
         if (err)
             res.json(err);
@@ -309,9 +309,9 @@ router.get("/filterPOIs", function(req, res) {
         if (req.query.hasOwnProperty(propName)) {
             values.push(req.query[propName]);
             if (propName == 'dateFrom') {
-                query = query + "DateStamp >= ?";
+                query = query + "DateFlagged >= ?";
             } else if (propName == 'dateTo') {
-                query = query + "DateStamp <= ?";
+                query = query + "DateFlagged <= ?";
             } else {
                 query = query + propName + " = ?";
             }
@@ -332,7 +332,7 @@ router.get("/poiDetail", function(req, res) {
     var and = "";
     var query = "";
     if (Object.keys(req.query).length > 0)
-        query = " WHERE ";
+        query = " AND ";
     if (Object.keys(req.query).length > 1)
         and = " AND ";
     var values = [];
@@ -357,7 +357,7 @@ router.get("/poiDetail", function(req, res) {
             query = query + and;
     }
 
-    con.query('SELECT * FROM DataPoint' + query, values, function(err,rows) {
+    con.query('SELECT DateStamp, DataValue, Type FROM DataPoint WHERE ACCEPTED = true' + query, values, function(err,rows) {
         if(err)
             console.log("Error Selecting : %s ",err );
         res.json(rows);

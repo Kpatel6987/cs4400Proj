@@ -36,7 +36,7 @@ export class DataPointComponent implements OnInit {
       alert("Success");
       this.router.navigate(["/home"]);
     },
-    err => alert("error " + err)
+    err => alert("A data point at this time and location has already been created")
     );
   }
 }

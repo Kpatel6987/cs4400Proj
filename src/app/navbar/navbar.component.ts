@@ -29,7 +29,11 @@ export class NavbarComponent {
       }
         
       });
-      this.accepted = localStorage.getItem('approved');
+      if (localStorage.getItem('approved') == 'false') {
+        this.accepted = false;
+      } else {
+        this.accepted = true;
+      }
       this.userType = localStorage.getItem('type');
   }
 
