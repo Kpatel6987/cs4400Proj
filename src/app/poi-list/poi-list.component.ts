@@ -4,8 +4,7 @@ import { UtilityService } from '../_services/utility.service';
 
 @Component({
   selector: 'app-poi-list',
-  templateUrl: './poi-list.component.html',
-  styleUrls: ['./poi-list.component.css']
+  templateUrl: './poi-list.component.html'
 })
 export class PoiListComponent implements OnInit {
 

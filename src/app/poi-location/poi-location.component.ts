@@ -6,8 +6,7 @@ import { LocationService } from '../_services/location.service';
 
 @Component({
   selector: 'app-poi-location',
-  templateUrl: './poi-location.component.html',
-  styleUrls: ['./poi-location.component.css']
+  templateUrl: './poi-location.component.html'
 })
 export class PoiLocationComponent implements OnInit {
   model: any = {};

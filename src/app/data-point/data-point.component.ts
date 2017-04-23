@@ -7,8 +7,7 @@ import { DataService } from '../_services/data.service';
 
 @Component({
   selector: 'app-data-point',
-  templateUrl: './data-point.component.html',
-  styleUrls: ['./data-point.component.css']
+  templateUrl: './data-point.component.html'
 })
 export class DataPointComponent implements OnInit {
 

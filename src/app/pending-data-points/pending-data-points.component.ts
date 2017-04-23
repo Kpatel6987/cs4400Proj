@@ -11,8 +11,7 @@ import { OrderBy } from '../_pipes/orderBy'
 
 @Component({
   selector: 'app-pending-data-points',
-  templateUrl: './pending-data-points.component.html',
-  styleUrls: ['./pending-data-points.component.css']
+  templateUrl: './pending-data-points.component.html'
 })
 export class PendingDataPointsComponent implements OnInit {
   points;

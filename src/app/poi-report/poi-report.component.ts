@@ -3,8 +3,7 @@ import { LocationService } from '../_services/location.service';
 
 @Component({
   selector: 'app-poi-report',
-  templateUrl: './poi-report.component.html',
-  styleUrls: ['./poi-report.component.css']
+  templateUrl: './poi-report.component.html'
 })
 export class PoiReportComponent implements OnInit {
   pois;
