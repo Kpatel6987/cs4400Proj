@@ -33,22 +33,22 @@ export class LoginComponent implements OnInit {
                             if (d[0].Approved == null) {
                                 alert("Account has been rejected");
                             } else {
-                                this.userService.showNavBar(true);
-                                this.router.navigate(["/home"]);
-                                localStorage.setItem('user', data[0].Username);
-                                localStorage.setItem('type', data[0].UserType);
                                 if (d[0].Approved == false)
                                     localStorage.setItem('approved', 'false');
                                 else 
                                     localStorage.setItem('approved', 'true');
+                                localStorage.setItem('user', data[0].Username);
+                                localStorage.setItem('type', data[0].UserType);
+                                this.router.navigate(["/home"]);
+                                this.userService.showNavBar(true);
                             }
-                        })
+                        });
                     } else {
-                        this.userService.showNavBar(true);
-                        this.router.navigate(["/home"]);
                         localStorage.setItem('user', data[0].Username);
                         localStorage.setItem('type', data[0].UserType);
-                    }
+                        this.router.navigate(["/home"]);
+                        this.userService.showNavBar(true);
+                    }        
                 }
                
             });

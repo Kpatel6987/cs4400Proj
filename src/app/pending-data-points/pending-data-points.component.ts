@@ -32,7 +32,6 @@ export class PendingDataPointsComponent implements OnInit {
     this.points = this.dataService.getPendingPoints().subscribe((data) => this.pointsArray.push(data));
     this.sortColumn = "DateStamp";
     this.ascending = true;
-    console.log(this.pointsArray);
   }
 
   changeSorting(column) {
