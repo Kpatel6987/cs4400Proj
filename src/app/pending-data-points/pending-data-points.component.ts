@@ -1,3 +1,8 @@
+/*
+ * Credit for sorting functionality:
+ * Cory Shaw, fueltravel.com
+ */
+
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { DataService } from '../_services/data.service';
