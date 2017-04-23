@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
             {
                 //console.log(data);
                 if (data.length == 0 || data[0].Username == null || data[0].Username == undefined) {
-                    alert("Invalid");
+                    alert("Invalid Username/ Password combination");
                 } else {
                     if (data[0].UserType == "City Official") {
                         this.userService.checkCityOfficial(data[0].Username).subscribe(d => {
